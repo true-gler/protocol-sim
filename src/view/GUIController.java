@@ -3,6 +3,11 @@ package view;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import model.Network;
+import model.Node;
+import model.Paket;
+import controller.InputParser;
+import controller.Simulator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -11,11 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.Network;
-import model.Node;
-import model.Paket;
-import controller.InputParser;
-import controller.Simulator;
 
 public class GUIController implements Initializable {
 	

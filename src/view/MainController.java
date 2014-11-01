@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.Reflection;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -93,11 +94,10 @@ public class MainController {
 		try {
 			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Simulation.fxml"));
-			GridPane root = (GridPane) loader.load();
+			BorderPane root = (BorderPane) loader.load();
 	        ColumnConstraints columnConstraints = new ColumnConstraints();
 	        columnConstraints.setFillWidth(true);
 	        columnConstraints.setHgrow(Priority.ALWAYS);
-	        root.getColumnConstraints().add(columnConstraints);
 			Stage stage = new Stage();
 			Scene scene = new Scene(root);
 			

@@ -1,7 +1,12 @@
 package view;
 
+import java.io.File;
 import java.net.URL;
+import java.util.Collections;
 import java.util.ResourceBundle;
+import java.util.Vector;
+
+import javax.swing.tree.DefaultMutableTreeNode;
 
 import model.Network;
 import model.Node;
@@ -15,6 +20,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.stage.Stage;
 
 public class GUIController implements Initializable {
@@ -39,6 +46,8 @@ public class GUIController implements Initializable {
 	Label tfMessage;
 	@FXML
 	Parent root;
+	@FXML
+	TreeView tvLog;
 
 	private static InputParser ip = InputParser.getInstance();
     private Stage primaryStage;
@@ -92,6 +101,7 @@ public class GUIController implements Initializable {
 							sim = new Simulator(initNode, receiver, p);
 							sim.startSimulation();
 						}
+						updateTreeView();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -105,9 +115,16 @@ public class GUIController implements Initializable {
 	}
 	@FXML
 	private void showNetwork() {
-
+		
 	}
-
+	
+	
+	private void updateTreeView(){
+		 
+       
+		
+	}
+	
 	private boolean checkInputs() {
 		
 		return true;

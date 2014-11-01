@@ -25,7 +25,7 @@ import javafx.scene.control.TreeView;
 import javafx.stage.Stage;
 
 public class GUIController implements Initializable {
-	
+
 	@FXML
 	Button bStart;
 	@FXML
@@ -50,28 +50,28 @@ public class GUIController implements Initializable {
 	TreeView tvLog;
 
 	private static InputParser ip = InputParser.getInstance();
-    private Stage primaryStage;
-	
+	private Stage primaryStage;
+
 	public void initialize(URL location, ResourceBundle resources) {
-		
-		taNetwork.setText(ip.getNetworkOutput());		
+
+		taNetwork.setText(ip.getNetworkOutput());
 	}
-	
+
 	/**
 	 * For closing the menu item
 	 */
 	@FXML
-	private void closeWindow(){
+	private void closeWindow() {
 		System.out.println("close");
-		this.primaryStage.close();	 
+		this.primaryStage.close();
 	}
-	
+
 	@FXML
 	private void startSimulation() {
-		System.out.println(primaryStage.getTitle());
 		if (checkInputs()) {
-			Network.setProbabilityForward(Float.parseFloat(tfForward.getText().toString()));
-			tfMessage.setText("Simulation Started");
+			Network.setProbabilityForward(Float.parseFloat(tfForward.getText()
+					.toString()));
+			tfMessage.setText("Simulation started");
 
 			Network n = Network.getInstance();
 			int receiverNr = Integer.parseInt(tfReceiver.getText().toString());
@@ -102,8 +102,9 @@ public class GUIController implements Initializable {
 							sim.startSimulation();
 						}
 						updateTreeView();
+						tfMessage.setText("Simulation finished");
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
+						// TODO Autto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -113,28 +114,47 @@ public class GUIController implements Initializable {
 			tfMessage.setText("Please check your inputs");
 		}
 	}
+
 	@FXML
 	private void showNetwork() {
-		
+		tfMessage.setText("'show network' not yet implemented");
 	}
-	
-	
-	private void updateTreeView(){
-		 
-       
-		
+
+	private void updateTreeView() {
+
 	}
-	
+
 	private boolean checkInputs() {
-		
-		return true;
+		try {
+			Integer.parseInt(tfReceiver.getText().toString());
+			Integer.parseInt(tfSender.getText().toString());
+			Integer.parseInt(tfSimulations.getText().toString());
+			Float.parseFloat(tfForward.getText().toString());
+			if (tfForward.getText().trim() == ""
+					|| tfMessage.getText().trim() == ""
+					|| tfPacket.getText().trim() == ""
+					|| tfReceiver.getText().trim() == ""
+					|| tfSender.getText().trim() == ""
+					|| tfSimulations.getText().trim() == "") {
+				tfMessage.setText("complete you inputs");
+				return false;
+			} else {
+				return true;
+			}
+		} catch (Exception e) {
+			tfMessage.setText("complete you inputs");
+			return false;
+		}
 	}
-	
-	/** Called from mainController to set the stage and handle events in controller
+
+	/**
+	 * Called from mainController to set the stage and handle events in
+	 * controller
+	 * 
 	 * @param stage
 	 */
 	public void setStage(Stage stage) {
-        this.primaryStage = stage;		
+		this.primaryStage = stage;
 	}
-	
+
 }

@@ -103,7 +103,7 @@ public class MainController {
 			
 			 // Get the Stage for Handle window operations in the controller
 	        
-	        GUIController controller = loader.getController();
+	        SimulationController controller = loader.getController();
 	        controller.setStage(stage);
 	        
 			// CSS

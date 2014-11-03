@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
+import javax.swing.JFileChooser;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import model.Network;
@@ -24,10 +25,12 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.stage.Stage;
 
-public class GUIController implements Initializable {
+public class SimulationController implements Initializable {
 
 	@FXML
 	Button bStart;
+	@FXML
+	Button bLog;
 	@FXML
 	Button bShowNetwork;
 	@FXML
@@ -100,8 +103,7 @@ public class GUIController implements Initializable {
 							Paket p = new Paket(1, tfPacket.getText());
 							sim = new Simulator(initNode, receiver, p);
 							sim.startSimulation();
-						}
-						updateTreeView();
+						}					
 						tfMessage.setText("Simulation finished");
 					} catch (Exception e) {
 						// TODO Autto-generated catch block
@@ -119,9 +121,11 @@ public class GUIController implements Initializable {
 	private void showNetwork() {
 		tfMessage.setText("'show network' not yet implemented");
 	}
-
-	private void updateTreeView() {
-
+	
+	@FXML
+	private void openLogFiles() {
+		JFileChooser jfc = new JFileChooser("./Logs");
+		jfc.showDialog(null, "Choose a log file");
 	}
 
 	private boolean checkInputs() {

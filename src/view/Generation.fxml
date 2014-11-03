@@ -72,7 +72,7 @@
             </MenuBar>
          </top>
          <bottom>
-            <Label fx:id="tfMessage" alignment="CENTER" prefHeight="15.0" prefWidth="519.0" text="- Message - " textAlignment="CENTER" BorderPane.alignment="CENTER" />
+            <Label fx:id="tfMessage" alignment="CENTER" prefHeight="15.0" prefWidth="519.0" textAlignment="CENTER" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
    </children>

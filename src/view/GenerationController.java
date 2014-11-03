@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import model.Node;
+import exceptions.NodeTypeNotFoundException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
@@ -23,6 +25,8 @@ public class GenerationController implements Initializable {
 	TextArea taType;
 	@FXML
 	TextArea taCount;
+	@FXML
+	TextField tfMessage;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -31,14 +35,29 @@ public class GenerationController implements Initializable {
 
 	@FXML
 	public void generateNetwork() {
-		int amountOfNodes = Integer.parseInt(tfAmount.getText());
-		String[] key = taType.getText().split("\n");
-		String[] value = taCount.getText().split("\n");
-		hm = new HashMap<String, Integer>();
-		for(int i =0; i < value.length; i++){
-			hm.put(key[i],  Integer.parseInt(value[i]));
+		try {
+			int amountOfNodes = Integer.parseInt(tfAmount.getText());
+			String[] key = taType.getText().split("\n");
+			String[] value = taCount.getText().split("\n");
+			hm = new HashMap<String, Integer>();
+			for(int i =0; i < value.length; i++){
+				if(createObject(key[i]) == null){				
+					throw new NodeTypeNotFoundException();
+				}
+				else{
+					hm.put(key[i],  Integer.parseInt(value[i]));
+				}
+			}
+			NetworkGenerator ng = new NetworkGenerator();
+			ng.generateNetwork(hm,amountOfNodes);
+			
+			closeWindow();
+			
+		} catch (NumberFormatException e) {
+			tfMessage.setText("check your inputs");
+		} catch (NodeTypeNotFoundException e){
+			tfMessage.setText("node type not found");
 		}
-		
 	}
 
 	/**
@@ -56,5 +75,19 @@ public class GenerationController implements Initializable {
 	@FXML
 	private void closeWindow() {
 		this.primaryStage.close();
+	}
+	private Node createObject(String type){
+		Object object = null;
+		try {
+			Class classDefinition = Class.forName(type);			
+			object = classDefinition.newInstance();
+		} catch (InstantiationException e) {
+			return null;
+		} catch (IllegalAccessException e) {
+			return null;
+		} catch (ClassNotFoundException e) {
+			return null;
+		}
+		return (Node) object;
 	}
 }

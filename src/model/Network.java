@@ -83,6 +83,16 @@ public class Network{
 	public static void setProbabilityForward(float probabilityForward) {
 		Network.probabilityForward = probabilityForward;
 	}
-
+	public static String getNetworkOutput(){
+		String str = "";
+		for(int i = 0; i < nodesToReach.size(); i ++){
+			 str += nodesToReach.get(i).getN().getId() + "  " + nodesToReach.get(i).getLl().toString() + " \n";
+		}
+		return str;
+	}
+	public static void printNetwork(){
+		System.out.println("\n List which nodes are reached by another \n ");
+		System.out.println(getNetworkOutput());
+	}
 	
 }

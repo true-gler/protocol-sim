@@ -172,21 +172,11 @@ public class InputParser {
 		Network.setAllNodes(allNodes);
 		Network.setNodesToReach(nodesToReach);	
 		
-		printNetwork();
+		Network.printNetwork();
 		return network;
 				
 	}
-	public String getNetworkOutput(){
-		String str = "";
-		for(int i = 0; i < nodesToReach.size(); i ++){
-			 str += nodesToReach.get(i).getN().getId() + "  " + nodesToReach.get(i).getLl().toString() + " \n";
-		}
-		return str;
-	}
-	public void printNetwork(){
-		System.out.println("\n List which nodes are reached by another \n ");
-		System.out.println(getNetworkOutput());
-	}
+	
 	
 	private Node createObject(String type){
 		Object object = null;

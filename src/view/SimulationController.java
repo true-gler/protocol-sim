@@ -57,7 +57,7 @@ public class SimulationController implements Initializable {
 
 	public void initialize(URL location, ResourceBundle resources) {
 
-		taNetwork.setText(ip.getNetworkOutput());
+		taNetwork.setText(Network.getNetworkOutput());
 	}
 
 	/**

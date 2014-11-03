@@ -54,7 +54,7 @@
               </rowConstraints>
                <children>
                   <Button fx:id="bRead" mnemonicParsing="false" onAction="#readFile" prefHeight="25.0" prefWidth="126.0" text="read from file" textAlignment="CENTER" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <Button fx:id="bGenerate" mnemonicParsing="false" onAction="#generateNetwork" prefHeight="25.0" prefWidth="128.0" text="generate" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Button fx:id="bGenerate" mnemonicParsing="false" onAction="#goToGeneratingGUI" prefHeight="25.0" prefWidth="128.0" text="generate" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                   <Label prefHeight="15.0" prefWidth="49.0" text="Network" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets />

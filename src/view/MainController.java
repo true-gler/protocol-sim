@@ -75,12 +75,6 @@ public class MainController {
 		}
 
 	}
-
-	@FXML
-	private void generateNetwork() {
-		goToGeneratingGUI();
-		//goToSimulationGUI();
-	}
 	
 	/**
 	 * For closing the menu item
@@ -111,26 +105,40 @@ public class MainController {
 			stage.setScene(scene);
 			stage.show();
 			
-			/*FXMLLoader loader = new FXMLLoader(getClass().getResource("Simulation.fxml"));
-			GridPane root = (GridPane) loader.load();
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			Stage stage = new Stage();
-			stage.setScene(scene);
-			
-			 // Get the Stage for Handle window operations in the controller
-	        GUIController controller = loader.getController();
-	        controller.setStage(stage);
-	        
-			stage.show();*/
 			closeWindow();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	@FXML
 	private void goToGeneratingGUI(){
-		//toDO
+	try {
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("Generation.fxml"));
+			GridPane root = (GridPane) loader.load();
+	        ColumnConstraints columnConstraints = new ColumnConstraints();
+	        columnConstraints.setFillWidth(true);
+	        columnConstraints.setHgrow(Priority.ALWAYS);
+			Stage stage = new Stage();
+			Scene scene = new Scene(root);
+			
+			 // Get the Stage for Handle window operations in the controller
+	        
+	        GenerationController controller = loader.getController();
+	        controller.setStage(stage);
+	        
+			// CSS
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage.setScene(scene);
+			stage.show();
+			
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/** Called from main to set the stage and handle events in controller

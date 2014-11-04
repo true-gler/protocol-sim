@@ -168,14 +168,17 @@ public class NetworkGenerator {
 	 * @return
 	 */
 	private boolean barabasi() {
-		int to;
-		float latency, f, t;
+		float latency;
 		for (int i = length; i < totalAmount; i++) {
 			for (int j = 0; j < i; j++) {
 				latency = getSecureRandomNumber() * 100;
 
-				if (getSecureRandomNumber() <= (nodesToReach.get(j).getLl()
-						.size() / totalConn)) {
+				float p_i = getSecureRandomNumber();
+				float sumP_j = nodesToReach.get(j).getLl().size(); //0?
+				sumP_j /= totalConn; 
+				
+				
+				if (p_i<= sumP_j) {
 					try {
 						nodesToReach.get(j).addReachable(allNodes.get(i),
 								latency);

@@ -47,11 +47,12 @@ public class GenerationController implements Initializable {
 			String[] key = taType.getText().split("\n");
 			String[] value = taCount.getText().split("\n");
 			hm = new HashMap<String, Integer>();
+			
 			for (int i = 0; i < value.length; i++) {
-				if (createObject(key[i]) == null) {
+				if (createObject("model."  +  key[i]) == null) {
 					throw new NodeTypeNotFoundException();
 				} else {
-					hm.put(key[i], Integer.parseInt(value[i]));
+					hm.put("model."  +  key[i], Integer.parseInt(value[i]));
 				}
 			}
 			NetworkGenerator ng = new NetworkGenerator();

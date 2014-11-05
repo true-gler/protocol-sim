@@ -8,7 +8,7 @@ import java.util.LinkedList;
  * @author Thomas
  *
  */
-public class ReachableNodes {
+public class ReachableNodes implements Comparable<Node> {
 	
 		private Node n; 		//target node
 		private double latency; //Latency to target node		
@@ -39,8 +39,22 @@ public class ReachableNodes {
 			return "  " + this.getN().getId() + " Latency: "+  this.getLatency() + "\t";
 			
 		}
-		
-		
-	
 
+		@Override
+		/**
+		 * To sort the output of the reachable Nodes in the GUI
+		 */
+		public int compareTo(Node o) {
+			int id = this.getN().getId();
+			if (id < o.getId()){
+				return 1;
+			}
+			else if (id > o.getId()){
+				return -1;
+			}
+			else {
+			return 0;
+			}
+		}
+		
 } 

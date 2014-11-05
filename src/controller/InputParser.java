@@ -119,7 +119,6 @@ public class InputParser {
 			 */
 			line = reader.readLine();
 			buffer = line.split(" ");
-			ReachableList rl;
 			while(line != null) {
 				if(!line.startsWith("#")){
 				// buffer[0] Connection node from

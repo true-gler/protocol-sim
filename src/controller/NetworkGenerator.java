@@ -41,8 +41,7 @@ public class NetworkGenerator {
 		float le = totalAmount / 20;
 		length = (int) le;
 
-		float factor = 0;
-		float prob = 0;
+		
 
 		initArrayLists(totalNodeAmount);
 
@@ -65,13 +64,14 @@ public class NetworkGenerator {
 				}
 				float idf = (float) p * totalNodeAmount;
 				int id = (int) idf;
-				node.setId(id);
-				node.setName(types.get(i));
+				
 				while (allNodes.get(id) != null) {
 					p = getSecureRandomNumber();
 					idf = (float) p * totalNodeAmount;
 					id = (int) idf;
 				}
+				node.setId(id);
+				node.setName(types.get(i));
 				allNodes.set(id, node);
 				ReachableList rl = new ReachableList(allNodes.get(id));
 				nodesToReach.set(id,rl);

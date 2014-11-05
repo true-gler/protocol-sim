@@ -162,13 +162,13 @@ public class SimulationController implements Initializable {
 					|| tfReceiver.getText().trim() == ""
 					|| tfSender.getText().trim() == ""
 					|| tfSimulations.getText().trim() == "") {
-				tfMessage.setText("complete you inputs");
+				tfMessage.setText("complete your inputs");
 				return false;
 			} else {
 				return true;
 			}
 		} catch (Exception e) {
-			tfMessage.setText("complete you inputs");
+			tfMessage.setText("complete your inputs");
 			return false;
 		}
 	}

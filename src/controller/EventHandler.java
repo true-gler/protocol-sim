@@ -86,6 +86,18 @@ public class EventHandler {
 			while (!this.queue.isEmpty()) {
 					e = this.queue.poll(); // gets and deletes
 					
+					/**
+					 * Check if the attack is a DOS-Attack
+					 * If a DOS happens, we have no package that gets transmitted
+					 */
+					try {
+						e.getInitNode().getP();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						//e1.printStackTrace();
+						return false;
+					}
+
 					// Formatting for CSV File
 					String output = lh.formattingLogOutput(e);
 					lh.appendData(output);
@@ -122,10 +134,11 @@ public class EventHandler {
 	private void executeEvent(Event e) {
 		Node sNode = ((Event) e).getInitNode();
 		Node rNode = ((Event) e).getreceiverNode();
-
+		
 		/**
 		 * Simulation Finished
 		 */
+		
 		if (e instanceof SimulationFinishedEvent) {
 			// Invokes the last receive
 			rNode.receive(sNode,rNode, rNode.getP());			

@@ -84,9 +84,22 @@ public class Network{
 		Network.probabilityForward = probabilityForward;
 	}
 	public static String getNetworkOutput(){
-		String str = "";
+		String str = "", type ="";
+		int id;
 		for(int i = 0; i < nodesToReach.size(); i ++){
-			 str += nodesToReach.get(i).getN().getId() + "  " + nodesToReach.get(i).getLl().toString() + " \n";
+			type = nodesToReach.get(i).getN().getClass().toString();
+			type = type.substring(12, type.length());
+			id =nodesToReach.get(i).getN().getId();
+			if(id != i){
+				System.out.println("WE ARE SCREWED!!!");
+			} 
+			if (type.contains("Node")){
+				
+				str += nodesToReach.get(i).getN().getId() + " " + type + "\t\t  " + nodesToReach.get(i).getLl().toString() + " \n";
+			} else {
+				str += nodesToReach.get(i).getN().getId() + " " + type + "  " + nodesToReach.get(i).getLl().toString() + " \n";
+			}
+			
 		}
 		return str;
 	}

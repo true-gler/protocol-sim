@@ -65,6 +65,7 @@ public class GenerationController implements Initializable {
 			
 
 		} catch (NumberFormatException e) {
+			e.printStackTrace();
 			tfMessage.setText("check your inputs");
 		} catch (NodeTypeNotFoundException e) {
 			tfMessage.setText("node type not found");

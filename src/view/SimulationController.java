@@ -1,7 +1,11 @@
 package view;
 
+import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.ResourceBundle;
 import java.util.Vector;
@@ -13,12 +17,18 @@ import model.Network;
 import model.Node;
 import model.Paket;
 import controller.InputParser;
+import controller.LogHandler;
 import controller.Simulator;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
@@ -50,14 +60,22 @@ public class SimulationController implements Initializable {
 	@FXML
 	Parent root;
 	@FXML
-	TreeView tvLog;
-
+	ListView lvLog;
+	
+	private static ObservableList<String> LogList = FXCollections.observableArrayList();      
+	private static String path = System.getProperty("user.dir");
 	private static InputParser ip = InputParser.getInstance();
 	private Stage primaryStage;
 
 	public void initialize(URL location, ResourceBundle resources) {
 
 		taNetwork.setText(Network.getNetworkOutput());
+		lvLog.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+		    	openCSV(newValue);
+		    }
+		});
 	}
 
 	/**
@@ -85,7 +103,7 @@ public class SimulationController implements Initializable {
 				try {
 					size = n.getAllNodes().size() - 1;
 				} catch (NullPointerException e1) {
-					tfMessage.setText("First read a File");
+					tfMessage.setText("First read a file");
 				}
 				if (receiverNr <= size && initNodeNr < size && initNodeNr >= 0) {
 					Node initNode = n.getAllNodes().get(initNodeNr);
@@ -103,17 +121,27 @@ public class SimulationController implements Initializable {
 							Paket p = new Paket(1, tfPacket.getText());
 							sim = new Simulator(initNode, receiver, p);
 							sim.startSimulation();
-						}					
+						}
+						LogHandler lg = new LogHandler();
+						
+						File f = new File(path + "/Logs");
+						ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));						
+										
+						LogList = FXCollections.observableArrayList();  
+						for(int i = 0; i < names.size();i++){							
+							LogList.add(names.get(i) + "\n");
+						}
+						
+						lvLog.setItems(LogList);	
 						tfMessage.setText("Simulation finished");
 					} catch (Exception e) {
-						// TODO Autto-generated catch block
 						e.printStackTrace();
 					}
 				}
 			} else
 				tfMessage.setText("Specify the correct Target/Send node");
 		} else {
-			tfMessage.setText("Please check your inputs");
+			// tfMessage.setText("Please check your inputs");
 		}
 	}
 
@@ -121,13 +149,8 @@ public class SimulationController implements Initializable {
 	private void showNetwork() {
 		tfMessage.setText("'show network' not yet implemented");
 	}
-	
-	@FXML
-	private void openLogFiles() {
-		JFileChooser jfc = new JFileChooser("./Logs");
-		jfc.showDialog(null, "Choose a log file");
-	}
 
+	
 	private boolean checkInputs() {
 		try {
 			Integer.parseInt(tfReceiver.getText().toString());
@@ -135,7 +158,6 @@ public class SimulationController implements Initializable {
 			Integer.parseInt(tfSimulations.getText().toString());
 			Float.parseFloat(tfForward.getText().toString());
 			if (tfForward.getText().trim() == ""
-					|| tfMessage.getText().trim() == ""
 					|| tfPacket.getText().trim() == ""
 					|| tfReceiver.getText().trim() == ""
 					|| tfSender.getText().trim() == ""
@@ -160,5 +182,23 @@ public class SimulationController implements Initializable {
 	public void setStage(Stage stage) {
 		this.primaryStage = stage;
 	}
+	
+	public void openCSV(String file){
+
+		Desktop dt = Desktop.getDesktop();
+		
+		try { 
+			String path = System.getProperty("user.dir");
+			System.out.println("OPEN FILE TODO");
+		//File f = new File(path + "/Logs/"+file);
+			//dt.open(f);
+		//	Desktop.getDesktop().open(new File("/home/thomas/test.txt"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 
 }

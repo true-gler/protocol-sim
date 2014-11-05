@@ -74,7 +74,7 @@ public class NetworkGenerator {
 				}
 				allNodes.set(id, node);
 				ReachableList rl = new ReachableList(allNodes.get(id));
-				nodesToReach.add(rl);
+				nodesToReach.set(id,rl);
 
 			}
 		}
@@ -88,7 +88,7 @@ public class NetworkGenerator {
 				node.setName("Node");
 				allNodes.set(i, node);
 				ReachableList rl = new ReachableList(allNodes.get(i));
-				nodesToReach.add(rl);
+				nodesToReach.set(i,rl);
 			}
 		}
 		if (totalAmount > 100) {
@@ -142,19 +142,20 @@ public class NetworkGenerator {
 
 		for (int i = 0; i < length; i++) {
 	
-			t = getSecureRandomNumber() * length;
-			to = (int) t;
-			while (t > 0.5) {
+			float prob = 0.6F;
+			while ( prob > 0.5) {
+				t = getSecureRandomNumber() * length;
+				to = (int) t;
 				latency = getSecureRandomNumber() * 100;
 				try {
 					nodesToReach.get(i).addReachable(allNodes.get(to), latency);
 					nodesToReach.get(to).addReachable(allNodes.get(i), latency);
 					totalConn++;
+					prob = getSecureRandomNumber();
 				} catch (Exception e) {
 					return false;
 				}
-				t = getSecureRandomNumber() * length;
-				to = (int) t;
+				
 			}
 		}
 		return true;
@@ -178,7 +179,7 @@ public class NetworkGenerator {
 				sumP_j /= totalConn; 
 				
 				
-				if (p_i<= sumP_j) {
+				if (p_i<= sumP_j || sumP_j == 0) {
 					try {
 						nodesToReach.get(j).addReachable(allNodes.get(i),
 								latency);
@@ -199,6 +200,7 @@ public class NetworkGenerator {
 	private void initArrayLists(int totalNodeAmount) {
 		for (int i = 0; i < totalNodeAmount; i++) {
 			allNodes.add(null);
+			nodesToReach.add(null);
 		}
 
 	}

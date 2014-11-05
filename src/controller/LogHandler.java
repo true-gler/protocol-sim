@@ -15,7 +15,8 @@ import event.Event;
  */
 
 public class LogHandler {
-	private static final String csvLogName = "./Logs/log";
+	private static String path = System.getProperty("user.dir");
+	private static final String csvLogName =  path+"/Logs/log";
 	private static int logcounter = 0;
 	private FileWriter writer;
 	
@@ -31,7 +32,7 @@ public class LogHandler {
 			try {
 				writer = new FileWriter(csvLogName+logcounter+".csv");
 			} catch (FileNotFoundException e1) {
-				new File("./Logs").mkdirs();
+								new File(path + "/Logs").mkdirs();
 				writer = new FileWriter(csvLogName+logcounter+".csv");
 			} 
 			String str = "Layer;sender;action;receiver;paket text;timestamp\n";
@@ -67,6 +68,7 @@ public class LogHandler {
 		   } catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		
 		}		
 	}
 	
@@ -74,6 +76,7 @@ public class LogHandler {
 		try {
 			writer.append("\n Totaltime: " + (time) + " ms");
 			writer.flush();
+			writer.close();
 			
 			logcounter++;
 		} catch (IOException e1) {
@@ -81,7 +84,5 @@ public class LogHandler {
 			e1.printStackTrace();
 		}
 	}
-	
-	
-	
+
 }

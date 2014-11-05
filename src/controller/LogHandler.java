@@ -57,7 +57,14 @@ public class LogHandler {
 		if (action.contains("RX")) action = "RX";
 		else action = "TX";
 		
-		String str = layer + ";" + e.getInitNode().getId() + ";" + action + ";" + e.getreceiverNode().getId() + ";" + e.getInitNode().getP().getPayload() + ";" + e.getTimestamp().toString() + "\n";
+		String str;
+		try {
+			str = layer + ";" + e.getInitNode().getId() + ";" + action + ";" + e.getreceiverNode().getId() + ";" + e.getInitNode().getP().getPayload() + ";" + e.getTimestamp().toString() + "\n";
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			//e1.printStackTrace();
+			str = "Denial of Service at Node: " + e.getInitNode();
+		}
 		
 		return str;
 	}

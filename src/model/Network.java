@@ -28,6 +28,8 @@ public class Network{
 	 */
 	public static ArrayList<Node> collabAL = new ArrayList<>();
 
+	
+	
 	public static Network getInstance() {
 	      if (instance == null) {
 	            instance = new Network(allNodes);

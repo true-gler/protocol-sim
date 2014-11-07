@@ -117,7 +117,7 @@ public class EventHandler {
 		} finally {
 			long end = System.currentTimeMillis();
 			System.out.println((end - begin) + "ms");
-			if(Network.collabAL != null){
+			if(Network.collabAL.size() > 0){
 				lh.appendData("\nThe following Nodes have been unmasked by the collaborating Nodes\n");
 				for (int i = 0; i < Network.collabAL.size(); i++){
 					lh.appendData(Network.collabAL.get(i).toString() + "\n");					

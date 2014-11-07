@@ -112,19 +112,20 @@ public class NetworkGenerator {
 	 * @return
 	 */
 	private boolean generateRandom() {
-		int to2, to;
+		int to2, to, lat;
 		float latency, f, t;
 		for (int i = 0; i < totalAmount; i++) {
 			latency = getSecureRandomNumber() * 100;
+			lat = (int) latency;
 			t = getSecureRandomNumber() * totalAmount;
 			f = getSecureRandomNumber() * totalAmount;
 			to = (int) t;
 			to2 = (int) f;
 			try {
-				nodesToReach.get(i).addReachable(allNodes.get(to), latency);
-				nodesToReach.get(to).addReachable(allNodes.get(i), latency);
-				nodesToReach.get(i).addReachable(allNodes.get(to2), latency);
-				nodesToReach.get(to2).addReachable(allNodes.get(i), latency);
+				nodesToReach.get(i).addReachable(allNodes.get(to), lat);
+				nodesToReach.get(to).addReachable(allNodes.get(i), lat);
+				nodesToReach.get(i).addReachable(allNodes.get(to2), lat);
+				nodesToReach.get(to2).addReachable(allNodes.get(i), lat);
 			} catch (Exception e) {
 				return false;
 			}

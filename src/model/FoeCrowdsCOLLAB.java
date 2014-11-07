@@ -120,8 +120,8 @@ public class FoeCrowdsCOLLAB extends Node{
 	 * @return */
 	public RXEvent transmitLayer3(Node initNode, Node nextNode, Paket p) {
 	
-		System.out.println("L3 | sending from : \tnode: " + initNode.getId() + " to " + nextNode.getId() +  " payload: " + p.getPayload());
 		nextNode.setP(p);
+		System.out.println("L3 | sending from : \tnode: " + initNode.getId() + " to " + nextNode.getId() +  " payload: " + p.getPayload());
 		RXEvent rxe = new RXEvent(initNode, nextNode); 
 		return rxe;
 	}

@@ -123,7 +123,8 @@ public class EventHandler {
 					lh.appendData(Network.collabAL.get(i).toString() + "\n");					
 				}
 				if(Network.collabAL.get(0) == startNode){
-					lh.appendData("\n Unvieled the initiator of the Communication \n");
+					lh.appendData("\n!PROOF Unvieled the initiator of the Communication \n");
+					System.out.println("\n!PROOF Unvieled the initiator of the Communication \n");
 					int collabAmount = Network.getInstance().getTypeOfNode("model.FoeCrowdsCOLLAB");
 					float probForward = Network.getInstance().getProbabilityForward();
 					
@@ -134,7 +135,9 @@ public class EventHandler {
 					if(collabAmount > 0){
 						if(Network.getInstance().getAllNodes().size() >= (probForward/(probForward-0.5))*
 								(collabAmount +1)){
-							System.out.println("Probable innocence according to the paper violated");
+							System.out.println("PROOF: Probable innocence according to the paper violated");
+							System.out.println("\nProbable innocence given but violated by collaborating foes\n");
+							lh.appendData("Probable innocence according to the paper violated");
 							lh.appendData("\nProbable innocence given but violated by collaborating foes\n");
 						}
 					}

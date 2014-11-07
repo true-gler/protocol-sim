@@ -12,14 +12,19 @@ import model.ReachableNodes;
 /**
  * @author Simon
  * 
- * Problems: 
- * 		- Every way is output twice
- * 		- Also longer paths than the shortest one are given.
- */
+ * The algorithm will need some improvements:
+ *	- 	According to Wikipedia we should use a fibonacci-heap to get the complexity from
+ *		O(n^2) to O(n*log(n) + m) 
+ *		where n is the number of nodes and 
+ *		m is the number of edges (or in our case number of connections)
+ */		
 
 public class Dijkstra {
 
-	/*
+	/**
+	 * A dijkstraTripel is the implementation of the "datastructure" used in the AlogDat slides.
+	 * it 
+	 * 
 	 * Dijkstra Tripel: (Node, connectedNode, Latency)
 	 */
 	private class dijkstraTripel {
@@ -72,9 +77,12 @@ public class Dijkstra {
 	 */
 	
 	public HashMap<Node, LinkedList<Node>> getShortestPaths(Node nForPath) {
+ 
+		//Fetch the network
+		Network n = Network.getInstance();
 
-		Network n = Network.getInstance(); //Get the network
-
+		
+		//Create two ArrayLists to store the allready covered Nodes and the nodes that have a direct connection to 
 		ArrayList<dijkstraTripel> nodesCovered = new ArrayList<dijkstraTripel>(); 
 		ArrayList<dijkstraTripel> edgeNodes = new ArrayList<dijkstraTripel>(); //Nodes that are reachable in each state
 

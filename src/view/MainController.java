@@ -105,7 +105,7 @@ public class MainController {
 			stage.setScene(scene);
 			stage.show();
 			
-			//closeWindow();
+			closeWindow();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -134,6 +134,8 @@ public class MainController {
 			stage.setScene(scene);
 			stage.show();
 			
+
+			closeWindow();
 			
 			
 		} catch(Exception e) {

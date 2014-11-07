@@ -140,7 +140,7 @@ public class NetworkGenerator {
 		/*
 		 * create random edges for m0 -> 4 Nodes initial
 		 */
-		int to;
+		int to, lat;
 		float latency, f, t;
 
 		for (int i = 0; i < length; i++) {
@@ -150,9 +150,10 @@ public class NetworkGenerator {
 				t = getSecureRandomNumber() * length;
 				to = (int) t;
 				latency = getSecureRandomNumber() * 100;
+				lat = (int) latency;
 				try {
-					nodesToReach.get(i).addReachable(allNodes.get(to), latency);
-					nodesToReach.get(to).addReachable(allNodes.get(i), latency);
+					nodesToReach.get(i).addReachable(allNodes.get(to), lat);
+					nodesToReach.get(to).addReachable(allNodes.get(i), lat);
 					totalConn++;
 					prob = getSecureRandomNumber();
 				} catch (Exception e) {
@@ -172,11 +173,12 @@ public class NetworkGenerator {
 	 * @return
 	 */
 	private boolean barabasi() {
+		int lat;
 		float latency;
 		for (int i = length; i < totalAmount; i++) {
 			for (int j = 0; j < i; j++) {
 				latency = getSecureRandomNumber() * 100;
-
+				lat = (int) latency;
 				float p_i = getSecureRandomNumber();
 				float sumP_j = nodesToReach.get(j).getLl().size(); //0?
 				sumP_j /= totalConn; 
@@ -185,9 +187,9 @@ public class NetworkGenerator {
 				if (p_i<= sumP_j || sumP_j == 0) {
 					try {
 						nodesToReach.get(j).addReachable(allNodes.get(i),
-								latency);
+								lat);
 						nodesToReach.get(i).addReachable(allNodes.get(j),
-								latency);
+								lat);
 					} catch (Exception e) {
 						return false;
 					}

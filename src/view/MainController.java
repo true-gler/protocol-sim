@@ -60,18 +60,18 @@ public class MainController {
 				if (network == null) {
 					tfMessage.setText("something is wrong with your file");
 				} else {			
-					tfMessage.setText("File read and network set");
+					tfMessage.setText("file read and network set");
 					goToSimulationGUI();
 				}
 			} else {
-				tfMessage.setText("Pleas choose a file !!!");
+				tfMessage.setText("choose a file or generate a nework");
 			}
 			
 			
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			tfMessage.setText("File read failed");
+			tfMessage.setText("file read failed");
 		}
 
 	}
@@ -105,7 +105,7 @@ public class MainController {
 			stage.setScene(scene);
 			stage.show();
 			
-			closeWindow();
+			//closeWindow();
 			
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -61,6 +61,8 @@ public class SimulationController implements Initializable {
 	Parent root;
 	@FXML
 	ListView lvLog;
+	@FXML
+	Label lLogDir;
 	
 	private static ObservableList<String> LogList = FXCollections.observableArrayList();      
 	private static String path = System.getProperty("user.dir");
@@ -68,7 +70,7 @@ public class SimulationController implements Initializable {
 	private Stage primaryStage;
 
 	public void initialize(URL location, ResourceBundle resources) {
-
+		lLogDir.setText("output in " + System.getProperty("user.dir") +  "/Logs");
 		taNetwork.setText(Network.getNetworkOutput());
 		lvLog.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 		    @Override
@@ -76,6 +78,7 @@ public class SimulationController implements Initializable {
 		    	openCSV(newValue);
 		    }
 		});
+		
 	}
 
 	/**

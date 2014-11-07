@@ -17,10 +17,10 @@ public class NetworkGenerator {
 
 	private Stage primaryStage;
 	// Array List which contains all nodes
-	private static ArrayList<Node> allNodes = new ArrayList<Node>();
+	private static ArrayList<Node> allNodes = null;
 
 	// Array List which contains all connections between the Nodes with Latency
-	private static ArrayList<ReachableList> nodesToReach = new ArrayList<ReachableList>();
+	private static ArrayList<ReachableList> nodesToReach = null;
 	// totalAmount of Nodes
 	private static int totalAmount;
 	// Connections in network
@@ -42,8 +42,10 @@ public class NetworkGenerator {
 		length = (int) le;
 
 		
-
-		initArrayLists(totalNodeAmount);
+		if(nodesToReach == null && allNodes == null)
+			initArrayLists(totalNodeAmount);
+		else
+			resetArrayLists(totalNodeAmount);
 
 		for (Map.Entry<String, Integer> entry : hm.entrySet()) {
 			types.add(entry.getKey());
@@ -197,13 +199,19 @@ public class NetworkGenerator {
 
 		return true;
 	}
-
 	private void initArrayLists(int totalNodeAmount) {
+		allNodes = new ArrayList<Node>();
+		nodesToReach = new ArrayList<ReachableList>();
 		for (int i = 0; i < totalNodeAmount; i++) {
 			allNodes.add(null);
 			nodesToReach.add(null);
 		}
-
+	}
+	private void resetArrayLists(int totalNodeAmount) {
+		for (int i = 0; i < totalNodeAmount; i++) {
+			allNodes.set(i,null);
+			nodesToReach.set(i,null);
+		}
 	}
 
 	public float getSecureRandomNumber() {

@@ -20,7 +20,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
-public class GenerationController implements Initializable {
+public class GenerationController {
 
 	private static HashMap<String, Integer> hm;
 
@@ -35,10 +35,6 @@ public class GenerationController implements Initializable {
 	@FXML
 	Label tfMessage;
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-
-	}
 
 	@FXML
 	public void generateNetwork() {
@@ -46,6 +42,11 @@ public class GenerationController implements Initializable {
 			int amountOfNodes = Integer.parseInt(tfAmount.getText());
 			String[] key = taType.getText().split("\n");
 			String[] value = taCount.getText().split("\n");
+			int totalFoes = 0;
+			for(int i = 0; i < key.length; i++){
+				totalFoes += Integer.parseInt(value[i]);
+			}
+			if(key.length == value.length  && amountOfNodes > totalFoes) {// keine eingabe von gleichen werten
 			hm = new HashMap<String, Integer>();
 			
 			for (int i = 0; i < value.length; i++) {
@@ -63,10 +64,12 @@ public class GenerationController implements Initializable {
 				tfMessage.setText("network generated");
 			}
 			goToSimulationGUI();
-			
+			}
+			else {
+				throw new NumberFormatException();
+			}
 
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
 			tfMessage.setText("check your inputs");
 		} catch (NodeTypeNotFoundException e) {
 			tfMessage.setText("node type not found");

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import controller.NetworkGenerator;
+import model.Network;
 import model.Node;
 import exceptions.NodeTypeNotFoundException;
 import javafx.fxml.FXML;
@@ -56,6 +57,9 @@ public class GenerationController {
 					hm.put("model."  +  key[i], Integer.parseInt(value[i]));
 				}
 			}
+			
+			Network.setTypesOfNodes(hm);
+			
 			NetworkGenerator ng = new NetworkGenerator();
 			
 			if (!ng.generateNetwork(hm, amountOfNodes)) {

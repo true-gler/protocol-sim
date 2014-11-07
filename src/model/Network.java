@@ -3,6 +3,7 @@ package model;
 import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Network{
@@ -20,7 +21,7 @@ public class Network{
 	private static ArrayList<ReachableList> nodesToReach;
 	private static ArrayList<Node> allNodes;
 	private static float probabilityForward;
-	
+	private static HashMap <String, Integer>typesOfNodes;
 	/*
 	 * Arraylist for the collaborating foes in the network. Every collaborating foe on
 	 * the way of the packet adds the Node he received it from
@@ -113,6 +114,19 @@ public class Network{
 	//We don't add a timestamp, since the transmission is successive
 	public static void addCollabInformation(Node n){
 		collabAL.add(n);
+	}
+
+	public static void setTypesOfNodes(HashMap<String, Integer> hm) {
+		typesOfNodes = hm;
+	}
+	
+	public static int getTypeOfNode(String nodeType){
+		if(typesOfNodes != null){
+			return typesOfNodes.get(nodeType);
+		} else {
+			return 0;
+		}
+
 	}
 	
 }

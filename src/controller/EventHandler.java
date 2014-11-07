@@ -122,6 +122,24 @@ public class EventHandler {
 				for (int i = 0; i < Network.collabAL.size(); i++){
 					lh.appendData(Network.collabAL.get(i).toString() + "\n");					
 				}
+				if(Network.collabAL.get(0) == startNode){
+					lh.appendData("\n Unvieled the initiator of the Communication \n");
+					int collabAmount = Network.getInstance().getTypeOfNode("model.FoeCrowdsCOLLAB");
+					float probForward = Network.getInstance().getProbabilityForward();
+					
+					/**
+					 * Beweisbare unschuld gegeben (probable innocence) aber verletzt, da 
+					 * startknoten herausgefunden, siehe Crowds Theorem 5.2 
+					 */
+					if(collabAmount > 0){
+						if(Network.getInstance().getAllNodes().size() >= (probForward/(probForward-0.5))*
+								(collabAmount +1)){
+							System.out.println("Probable innocence according to the paper violated");
+							lh.appendData("\nProbable innocence given but violated by collaborating foes\n");
+						}
+					}
+						
+					}
 			}
 			lh.writeTotalTime((end-begin));
 		}

@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedList;
 
 
@@ -85,16 +86,11 @@ public class Network{
 	}
 	public static String getNetworkOutput(){
 		String str = "", type ="";
-		int id;
 		for(int i = 0; i < nodesToReach.size(); i ++){
 			type = nodesToReach.get(i).getN().getClass().toString();
 			type = type.substring(12, type.length());
-			id =nodesToReach.get(i).getN().getId();
-			if(id != i){
-				System.out.println("WE ARE SCREWED!!!");
-			} 
+			
 			if (type.contains("Node")){
-				
 				str += nodesToReach.get(i).getN().getId() + " " + type + "\t\t  " + nodesToReach.get(i).getLl().toString() + " \n";
 			} else {
 				str += nodesToReach.get(i).getN().getId() + " " + type + "  " + nodesToReach.get(i).getLl().toString() + " \n";

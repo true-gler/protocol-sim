@@ -5,17 +5,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-
-
-import java.util.List;
-import java.util.Map.Entry;
-
 import model.Network;
 import model.Node;
-import model.ReachableList;
 import model.ReachableNodes;
-import event.Event;
-import event.TXEvent;
 
 /**
  * @author Simon
@@ -26,8 +18,6 @@ import event.TXEvent;
  */
 
 public class Dijkstra {
-
-	private boolean debug = true;
 
 	/*
 	 * Dijkstra Tripel: (Node, connectedNode, Latency)

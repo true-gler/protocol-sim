@@ -1,9 +1,9 @@
 package model;
 
+import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
-
 
 public class Network{
 
@@ -20,6 +20,12 @@ public class Network{
 	private static ArrayList<ReachableList> nodesToReach;
 	private static ArrayList<Node> allNodes;
 	private static float probabilityForward;
+	
+	/*
+	 * Arraylist for the collaborating foes in the network. Every collaborating foe on
+	 * the way of the packet adds the Node he received it from
+	 */
+	public static ArrayList<Node> collabAL = new ArrayList<>();
 
 	public static Network getInstance() {
 	      if (instance == null) {
@@ -102,6 +108,11 @@ public class Network{
 	public static void printNetwork(){
 		System.out.println("\n List which nodes are reached by another \n ");
 		System.out.println(getNetworkOutput());
+	}
+	
+	//We don't add a timestamp, since the transmission is successive
+	public static void addCollabInformation(Node n){
+		collabAL.add(n);
 	}
 	
 }

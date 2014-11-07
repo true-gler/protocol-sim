@@ -38,7 +38,7 @@ public class EventHandler {
 	private LinkedList<Node> listForComm;
 	
 	/* Logging */
-	private static LogHandler lh = new LogHandler();
+	private static LogHandler lh;
 	
 	/**
 	 * The returned hashmap of the Dijkstra-Algorithm, containing all shortest
@@ -63,6 +63,7 @@ public class EventHandler {
 		this.setEndNode(endNode);
 		this.setPaket(paket);
 		startNode.setP(paket);
+		lh = LogHandler.getInstance();
 	}
 
 	
@@ -116,6 +117,12 @@ public class EventHandler {
 		} finally {
 			long end = System.currentTimeMillis();
 			System.out.println((end - begin) + "ms");
+			if(Network.collabAL != null){
+				lh.appendData("\nThe following Nodes have been unmasked by the collaborating Nodes\n");
+				for (int i = 0; i < Network.collabAL.size(); i++){
+					lh.appendData(Network.collabAL.get(i).toString() + "\n");					
+				}
+			}
 			lh.writeTotalTime((end-begin));
 		}
 		return true;

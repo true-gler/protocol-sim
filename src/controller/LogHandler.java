@@ -18,9 +18,17 @@ public class LogHandler {
 	private static String path = System.getProperty("user.dir");
 	private static final String csvLogName =  path+"/Logs/log";
 	private static int logcounter = 0;
-	private FileWriter writer;
+	private static FileWriter writer;
+	private static LogHandler instance = null;
 	
-	
+	public static LogHandler getInstance(){
+		if(instance == null){
+			instance = new LogHandler();
+			return instance;
+		} else {
+			return instance;
+		}
+	}
 
 	/**
 	 * Instanciate the FileWriter for logging

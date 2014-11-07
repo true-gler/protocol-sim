@@ -59,7 +59,6 @@ public class FoeCrowdsDOS extends Node{
 		return (Event)simFin;
 	}
 	
-	
 	public RXEvent transmitLayer3(Node initNode, Node nextNode, Paket p){
 		
 		/**

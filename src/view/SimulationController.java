@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
@@ -83,15 +84,16 @@ public class SimulationController implements Initializable {
 		lg =  LogHandler.getInstance();
 		
 		try {
-			File f = new File(path + "/Logs");
-			
-				ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));						
-								
+				File f = new File(path + "/Logs");			
+				ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));														
 				LogList = FXCollections.observableArrayList();  
-				for(int i = 0; i < names.size();i++){							
-					LogList.add(names.get(i) + "\n");
-				}
-				
+				Collections.sort(names, new Comparator<String>() {
+			        public int compare(String  st1, String  str2)
+			        {
+			            return  st1.compareTo(str2);
+			        }
+			    });
+				LogList.addAll(names);				
 				lvLog.setItems(LogList);
 		} catch (Exception e) {
 			
@@ -153,13 +155,16 @@ public class SimulationController implements Initializable {
 						
 						
 						File f = new File(path + "/Logs");
-						ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));						
-										
-						LogList = FXCollections.observableArrayList();  
-						for(int i = 0; i < names.size();i++){							
-							LogList.add(names.get(i) + "\n");
-						}
-						
+						ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));										
+						LogList = FXCollections.observableArrayList();	
+						//Sorting
+						Collections.sort(names, new Comparator<String>() {
+						        public int compare(String  st1, String  str2)
+						        {
+						            return  st1.compareTo(str2);
+						        }
+						    });
+						LogList.addAll(names);
 						lvLog.setItems(LogList);	
 						tfMessage.setText("Simulation finished");
 					} catch (Exception e) {

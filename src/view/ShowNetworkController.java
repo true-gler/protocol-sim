@@ -42,14 +42,6 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.LineBuilder;
 import javafx.stage.Stage;
 
-/**
- * A sample showing how to use JUNG's layout classes to position vertices in a
- * graph.
- * 
- * @author jeffreyguenther
- * @author timheng
- */
-
 class Edge {
 	int key;
 	Pair<Integer> p;

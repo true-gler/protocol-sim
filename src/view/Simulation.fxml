@@ -48,7 +48,7 @@
                         <Tooltip text="Probability to forward to the next node into the crowd. (1-p) is the probability to forward to the receiver (end node)" />
                      </tooltip>
                   </Label>
-                  <TextField fx:id="tfForward" text="0.5" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <TextField fx:id="tfForward" text="0.7" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

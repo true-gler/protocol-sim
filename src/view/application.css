@@ -24,11 +24,8 @@
       
 }
 .text-field {
-    
-    -fx-border-style: null;
     -fx-background-radius: 0;
- 
-    -fx-background-color: #ffffff; 
+    -fx-background-color: lightgray ; 
     -fx-font-size: 9pt;
     -fx-text-fill: black;
 }
@@ -37,7 +34,7 @@
 	 -fx-border-style: null;
     -fx-background-radius: 0;
  
-    -fx-background-color: #ffffff;
+    -fx-background-color: lightgray;
    
     
     -fx-font-size: 10pt;

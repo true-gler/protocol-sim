@@ -27,6 +27,7 @@ import model.ReachableNodes;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import static javafx.application.Application.launch;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -40,6 +41,7 @@ import javafx.scene.shape.CircleBuilder;
 import javafx.scene.shape.FillRule;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.LineBuilder;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 class Edge {
@@ -59,12 +61,16 @@ public class ShowNetworkController extends Application {
 	@Override
 	public void start(Stage stage) {
 		// setup up the scene.
+
+        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 		root = new Group();
 		scene = new Scene(root, 800, 800, Color.WHITE);
 		Label label  = new Label("klick the dots to show the id");
 		
-		label.setLayoutX(330);
-		label.setLayoutY(780);
+		double width = primaryScreenBounds.getWidth();
+		double height = primaryScreenBounds.getHeight();
+		label.setLayoutX((width /2)-label.getText().length()*3);
+		label.setLayoutY(10);
 		
 		
 		
@@ -93,9 +99,6 @@ public class ShowNetworkController extends Application {
 				ReachableNodes n = (ReachableNodes) li.next();
 
 				graph1.addEdge(new Edge(), first.getId(), n.getN().getId());
-
-				// graph1.addEdge(new Edge(), first, n);
-				// graph1.addEdge(new Edge(), first, n);
 			}
 		}
 
@@ -108,14 +111,18 @@ public class ShowNetworkController extends Application {
 		 * layout for the graph. It updates the layout object passed in.
 		 */
 		VisualizationModel vm1 = new DefaultVisualizationModel(circleLayout,
-				new Dimension(800, 800));
-
+				new Dimension((int)width, (int)height));
+		
 		// draw the graph
 		renderGraph(graph1, circleLayout, viz1);
 
 		root.getChildren().add(viz1);
 
 		stage.setTitle("Visualization of the Network");
+		stage.setX(primaryScreenBounds.getMinX());
+	    stage.setY(primaryScreenBounds.getMinY());
+	    stage.setWidth(primaryScreenBounds.getWidth());
+	    stage.setHeight(primaryScreenBounds.getHeight());
 		stage.setScene(scene);
 		stage.show();
 
@@ -141,26 +148,6 @@ public class ShowNetworkController extends Application {
 			if (debug)
 				System.out.println(i + " " + p.getX() + " " + p.getY());
 			
-		/*	if (p.getY() >= 400) {
-				if (p.getX() >= 400) { // right lower
-					l.setLayoutX(p.getX());
-					l.setLayoutY(p.getY());
-				} else { // left lower
-					l.setLayoutX(p.getX());
-					l.setLayoutY(p.getY());
-				}
-			} else {
-				if (p.getX() >= 400) { // right upper
-					l.setLayoutX(p.getX());
-					l.setLayoutY(p.getY());
-				} else { // left upper
-					l.setLayoutX(p.getX());
-					l.setLayoutY(p.getY());
-				}
-			}
-			*/
-			
-			// i = (int) it.next();
 			
 			// draw the vertex as a circle
 			Circle circle = new Circle();

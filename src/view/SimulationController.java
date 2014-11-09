@@ -24,8 +24,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -33,6 +35,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
 public class SimulationController implements Initializable {
@@ -150,7 +157,33 @@ public class SimulationController implements Initializable {
 
 	@FXML
 	private void showNetwork() {
-		tfMessage.setText("'show network' not yet implemented");
+		ShowNetworkController snc = new ShowNetworkController();
+		snc.start(new Stage());
+		/*	try {
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("ShowNetwork.fxml"));
+			GridPane root = (GridPane) loader.load();
+	        ColumnConstraints columnConstraints = new ColumnConstraints();
+	        columnConstraints.setFillWidth(true);
+	        columnConstraints.setHgrow(Priority.ALWAYS);
+			Stage stage = new Stage();
+			Scene scene = new Scene(root);
+			
+			 // Get the Stage for Handle window operations in the controller
+	        
+	        ShowNetworkController controller = loader.getController();
+	        controller.setStage(stage);
+	        
+			// CSS
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage.setScene(scene);
+			stage.show();
+			
+			closeWindow();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}*/
 	}
 
 	

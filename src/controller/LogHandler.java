@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
+import javafx.collections.FXCollections;
 import event.Event;
 
 /**
@@ -28,6 +31,19 @@ public class LogHandler {
 		} else {
 			return instance;
 		}
+	}
+	
+	public LogHandler(){
+		
+		try {
+			File f = new File(path + "/Logs");
+			
+			ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));						
+			logcounter = names.size();
+		} catch (Exception e) {
+			logcounter = 0;
+		}
+		 
 	}
 
 	/**

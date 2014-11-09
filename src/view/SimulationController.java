@@ -75,10 +75,28 @@ public class SimulationController implements Initializable {
 	private static String path = System.getProperty("user.dir");
 	private static InputParser ip = InputParser.getInstance();
 	private Stage primaryStage;
+	private LogHandler lg;
 
 	public void initialize(URL location, ResourceBundle resources) {
 		lLogDir.setText("output in " + System.getProperty("user.dir") +  "/Logs");
 		taNetwork.setText(Network.getNetworkOutput());
+		lg =  LogHandler.getInstance();
+		
+		try {
+			File f = new File(path + "/Logs");
+			
+				ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));						
+								
+				LogList = FXCollections.observableArrayList();  
+				for(int i = 0; i < names.size();i++){							
+					LogList.add(names.get(i) + "\n");
+				}
+				
+				lvLog.setItems(LogList);
+		} catch (Exception e) {
+			
+		}
+	
 		lvLog.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 		    @Override
 		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -132,7 +150,7 @@ public class SimulationController implements Initializable {
 							sim = new Simulator(initNode, receiver, p);
 							sim.startSimulation();
 						}
-						LogHandler lg = new LogHandler();
+						
 						
 						File f = new File(path + "/Logs");
 						ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));						
@@ -159,31 +177,6 @@ public class SimulationController implements Initializable {
 	private void showNetwork() {
 		ShowNetworkController snc = new ShowNetworkController();
 		snc.start(new Stage());
-		/*	try {
-			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("ShowNetwork.fxml"));
-			GridPane root = (GridPane) loader.load();
-	        ColumnConstraints columnConstraints = new ColumnConstraints();
-	        columnConstraints.setFillWidth(true);
-	        columnConstraints.setHgrow(Priority.ALWAYS);
-			Stage stage = new Stage();
-			Scene scene = new Scene(root);
-			
-			 // Get the Stage for Handle window operations in the controller
-	        
-	        ShowNetworkController controller = loader.getController();
-	        controller.setStage(stage);
-	        
-			// CSS
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			stage.setScene(scene);
-			stage.show();
-			
-			closeWindow();
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		}*/
 	}
 
 	

@@ -58,7 +58,7 @@ class Edge {
 
 public class ShowNetworkController extends Application {
 	private Stage primaryStage;
-	private static final int CIRCLE_SIZE = 3; // default circle size
+	private static final int CIRCLE_SIZE = 4; // default circle size
 	private boolean debug = false;
 
 	Group root;
@@ -73,6 +73,8 @@ public class ShowNetworkController extends Application {
 		
 		label.setLayoutX(330);
 		label.setLayoutY(780);
+		
+		
 		
 		Group viz1 = new Group();
 		viz1.getChildren().add(label);
@@ -221,11 +223,13 @@ public class ShowNetworkController extends Application {
 			Line line = LineBuilder.create().startX(pStart.getX())
 					.startY(pStart.getY()).endX(pEnd.getX()).endY(pEnd.getY())
 					.build();
+			
+		
 			// add the edges to the screen
 			viz.getChildren().add(line);
 		}
 		viz.getChildren().add(l);
-		viz.autosize();
+		
 	}
 
 	public void setStage(Stage stage) {

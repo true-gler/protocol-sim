@@ -20,6 +20,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import javax.vecmath.Color4f;
+
 import model.Network;
 import model.Node;
 import model.ReachableList;
@@ -33,6 +35,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -154,20 +157,23 @@ public class ShowNetworkController extends Application {
 			circle.setCenterX(p.getX());
 			circle.setCenterY(p.getY());
 			circle.setRadius(CIRCLE_SIZE);
-			circle.setFill(Color.GRAY);
+			circle.setFill(Color.DIMGRAY);
 			circle.setId(Integer.toString(i));
 			circle.setOnMousePressed(new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent me) {
 					// change the z-coordinate of the circle
 					// circle.toFront();
-					circle.setRadius(CIRCLE_SIZE + 15);
+					circle.setRadius(CIRCLE_SIZE + 5);
 					double x = circle.getCenterX();
-					double y = circle.getCenterY();
-					
+					double y = circle.getCenterY();					
 					l.setLayoutX(x-7);
 					l.setLayoutY(y-7);
-					l.setTextFill(Color.WHITE);
-					l.setText(circle.getId());
+					l.setTextFill(Color.WHITE);					
+					Tooltip t = new Tooltip();
+					int countConnections = Network.getInstance().getNodesToReach().get(Integer.parseInt(circle.getId())).getLl().size();
+					t.setText("id:" +circle.getId() + " #conn:"+Integer.toString(countConnections));
+					l.setTooltip(t);
+					t.show(l, x, y);
 					l.setVisible(true);
 					
 				}

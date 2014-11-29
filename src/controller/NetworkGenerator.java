@@ -13,9 +13,16 @@ import model.Network;
 import model.Node;
 import model.ReachableList;
 
+/**
+ * This is the algorithm to generate the network, using the barabasi albert model.
+ * According to research this algorithm models the structure of todays internet very well
+ * because nodes with a large number of connections get even more connections and those
+ * with fewer connections are not as likely to get new connections
+ */
+
 public class NetworkGenerator {
 
-	private Stage primaryStage;
+	//private Stage primaryStage;
 	// Array List which contains all nodes
 	private static ArrayList<Node> allNodes = null;
 
@@ -27,7 +34,13 @@ public class NetworkGenerator {
 	private static int totalConn = 0;
 
 	private static int length = 0;
-
+	
+	/*
+	 * Define the maximum number of connections for each node
+	 * This is used to increase the performance of the system. The Dijkstra takes to long otherwise
+	 */
+	private final int maxNodeDegree = 20;
+	
 	public boolean generateNetwork(HashMap<String, Integer> hm,
 			int totalNodeAmount) throws NodeTypeNotFoundException {
 		Network network = Network.getInstance();
@@ -151,6 +164,7 @@ public class NetworkGenerator {
 				to = (int) t;
 				latency = getSecureRandomNumber() * 100;
 				lat = (int) latency;
+				//Can generate multiple connections between 2 nodes
 				try {
 					nodesToReach.get(i).addReachable(allNodes.get(to), lat);
 					nodesToReach.get(to).addReachable(allNodes.get(i), lat);
@@ -177,14 +191,24 @@ public class NetworkGenerator {
 		float latency;
 		for (int i = length; i < totalAmount; i++) {
 			for (int j = 0; j < i; j++) {
-				latency = getSecureRandomNumber() * 100;
-				lat = (int) latency;
-				float p_i = getSecureRandomNumber();
-				float sumP_j = nodesToReach.get(j).getLl().size(); //0?
-				sumP_j /= totalConn; 
+				float probAdd = getSecureRandomNumber();
+				float p_i = nodesToReach.get(j).getLl().size(); 
+				//Boolean value that is used in the generation to see if a node should be added or not
+				boolean allowConnection = false;
+				//check if the maximum number of connections is allready reache
+				if(p_i < maxNodeDegree){
+					allowConnection = true;
+				}
+				p_i /= totalConn; 
 				
-				
-				if (p_i<= sumP_j || sumP_j == 0) {
+				/*
+				 * if the random number probAdd is bigger than p_i, the ratio of connections in a node 
+				 * by the number of total connections
+				 * p_i == 0 is used to determine if a node has no connections so far
+				 */
+				if ((probAdd <= p_i || p_i == 0) && allowConnection) {
+					latency = getSecureRandomNumber() * 100;
+					lat = (int) latency;
 					try {
 						nodesToReach.get(j).addReachable(allNodes.get(i),
 								lat);
@@ -195,7 +219,6 @@ public class NetworkGenerator {
 					}
 					totalConn++;
 				}
-
 			}
 		}
 

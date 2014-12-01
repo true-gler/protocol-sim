@@ -124,7 +124,7 @@ public class EventHandler {
 			System.out.println((end - begin) + "ms");
 			
 			
-			protocol.executePostSimulation(null);
+			protocol.executePostSimulation(null); 
 			
 			
 			lh.writeTotalTime((end-begin));

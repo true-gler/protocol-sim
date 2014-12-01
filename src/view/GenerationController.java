@@ -35,6 +35,8 @@ public class GenerationController {
 	TextArea taCount;
 	@FXML
 	Label tfMessage;
+	@FXML
+	TextArea taParameter;
 
 
 	@FXML

@@ -54,7 +54,7 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </TextArea>
-                  <TextArea prefHeight="45.0" prefWidth="178.0" text="Algorithm: Dijkstra&#10;Parameter:&#10;pf 0.6" GridPane.columnSpan="2147483647" GridPane.rowIndex="3" GridPane.rowSpan="2">
+                  <TextArea fx:id="taParamter" prefHeight="45.0" prefWidth="178.0" text="Algorithm: Dijkstra&#10;Parameter:&#10;pf 0.6" GridPane.columnSpan="2147483647" GridPane.rowIndex="3" GridPane.rowSpan="2">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>

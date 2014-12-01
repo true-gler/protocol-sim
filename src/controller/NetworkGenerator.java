@@ -1,5 +1,9 @@
 package controller;
 
+import interfaces.IAlgorithm;
+import interfaces.INode;
+import interfaces.IProtocol;
+
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +26,7 @@ import model.ReachableList;
 
 public class NetworkGenerator {
 
+	private static boolean debug = false;
 	//private Stage primaryStage;
 	// Array List which contains all nodes
 	private static ArrayList<Node> allNodes = null;
@@ -73,7 +78,7 @@ public class NetworkGenerator {
 			for (int j = 0; j < amount.get(i); j++) {
 				p = getSecureRandomNumber();
 				String type = types.get(i);
-				Node node = createObject(type);
+				INode node = createObjectNode(type);
 				if (node == null) {
 					throw new NodeTypeNotFoundException();
 				}
@@ -87,7 +92,7 @@ public class NetworkGenerator {
 				}
 				node.setId(id);
 				node.setName(types.get(i));
-				allNodes.set(id, node);
+				allNodes.set(id, (Node) node);
 				ReachableList rl = new ReachableList(allNodes.get(id));
 				nodesToReach.set(id,rl);
 
@@ -244,18 +249,19 @@ public class NetworkGenerator {
 		return random.nextFloat();
 	}
 
-	private Node createObject(String type) {
-		Object object = null;
+
+	private INode createObjectNode(String type){		
+		INode castToINode = null;
 		try {
-			Class classDefinition = Class.forName(type);
-			object = classDefinition.newInstance();
+			Class classDefinition = Class.forName(type);			
+			castToINode = (INode) classDefinition.newInstance();			
 		} catch (InstantiationException e) {
-			return null;
+			if(debug) System.out.println(e);
 		} catch (IllegalAccessException e) {
-			return null;
+			if(debug) System.out.println(e);
 		} catch (ClassNotFoundException e) {
-			return null;
+			if(debug) System.out.println(e);
 		}
-		return (Node) object;
-	}
+		return castToINode;
+	}	
 }

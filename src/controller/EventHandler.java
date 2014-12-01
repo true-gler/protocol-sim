@@ -203,7 +203,7 @@ public class EventHandler {
 					/** holds the path to go for
 					* layer 3 but in reverse order
 					*/
-					/************************************************************************/
+					/***************************FEHLER*********************************************/
 					listForCommunication = null; 
 					try {
 						if (processedNodesWithAlgorithm.get(sNode).get(rNode) != null) {

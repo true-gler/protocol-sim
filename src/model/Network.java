@@ -132,11 +132,11 @@ public class Network{
 		String str = "", type ="", key ="";
 		
 		str+= "Protocol: ";
-		str += protocol.toString() + "\n\n";
+		str += protocol.toString() + "\n";
 		
 		
 	    str+= "Algorithm: ";
-	    str += algorithm.toString() + "\n\n";
+	    str += algorithm.toString() + "\n";
 			
 		str+= "Parameter:\n";
 		Iterator it = parameter.entrySet().iterator();

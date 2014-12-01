@@ -1,5 +1,9 @@
 package view;
 
+import interfaces.IAlgorithm;
+import interfaces.INode;
+import interfaces.IProtocol;
+
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -24,7 +28,7 @@ import javafx.stage.Stage;
 public class GenerationController {
 
 	private static HashMap<String, Integer> hm;
-
+	private static boolean debug = false;
 	private Stage primaryStage;
 
 	@FXML
@@ -45,6 +49,38 @@ public class GenerationController {
 			int amountOfNodes = Integer.parseInt(tfAmount.getText());
 			String[] key = taType.getText().split("\n");
 			String[] value = taCount.getText().split("\n");
+			String[] parameter = taParameter.getText().split("\n"); 
+			
+			// Get the Parameter
+			String protocol = parameter[0].split(":")[1].trim();
+			String algorithm = parameter[1].split(":")[1].trim();
+			IAlgorithm ialgorithm = createObjectAlgorithm(algorithm);
+			IProtocol iprotocol = createObjectProtocol(protocol);
+			Network.setAlgorithm(ialgorithm);
+			Network.setProtocol(iprotocol);
+			
+			String[] str = null;
+			String name = "";
+			
+			for(int i = 3; i < parameter.length; i++){
+				str = parameter[i].split(" ");
+				name = str[0];
+				if(!name.isEmpty()){
+					try {
+						float valuef = Float.parseFloat(str[1]);
+						Network.addParameter(name, valuef);	
+					} catch (Exception e) {							
+						// TODO Auto-generated catch block
+						String valuestr = str[1];
+						Network.addParameter(name, valuestr);	
+						e.printStackTrace();
+					}
+				}						
+			}
+			 
+			
+			
+			// get foe text area
 			int totalFoes = 0;
 			for(int i = 0; i < key.length; i++){
 				totalFoes += Integer.parseInt(value[i]);
@@ -53,7 +89,7 @@ public class GenerationController {
 			hm = new HashMap<String, Integer>();
 			
 			for (int i = 0; i < value.length; i++) {
-				if (createObject("model."  +  key[i]) == null) {
+				if (createObjectNode("model."  +  key[i]) == null) {
 					throw new NodeTypeNotFoundException();
 				} else {
 					hm.put("model."  +  key[i], Integer.parseInt(value[i]));
@@ -127,18 +163,51 @@ public class GenerationController {
 		this.primaryStage.close();
 	}
 
-	private Node createObject(String type) {
-		Object object = null;
+	private INode createObjectNode(String type){		
+		INode castToINode = null;
 		try {
-			Class classDefinition = Class.forName(type);
-			object = classDefinition.newInstance();
+			Class classDefinition = Class.forName(type);			
+			castToINode = (INode) classDefinition.newInstance();			
 		} catch (InstantiationException e) {
-			return null;
+			if(debug) System.out.println(e);
 		} catch (IllegalAccessException e) {
-			return null;
+			if(debug) System.out.println(e);
 		} catch (ClassNotFoundException e) {
-			return null;
+			if(debug) System.out.println(e);
 		}
-		return (Node) object;
+		return castToINode;
+	}
+	
+	private IProtocol createObjectProtocol(String type){		
+		IProtocol castToIProtocol = null;
+		try {
+			Class classDefinition = Class.forName("protocol." + type);			
+			castToIProtocol = (IProtocol) classDefinition.newInstance();
+		
+		} catch (InstantiationException e) {
+			if(debug) System.out.println(e);
+		} catch (IllegalAccessException e) {
+			if(debug) System.out.println(e);
+		} catch (ClassNotFoundException e) {		
+			if(debug) System.out.println(e);
+		}
+		return castToIProtocol;
+	}
+	
+	private IAlgorithm createObjectAlgorithm(String type){
+		
+		IAlgorithm castToIAlgorithm = null;
+		try {
+			Class classDefinition = Class.forName("algorithm." + type);			
+			castToIAlgorithm = (IAlgorithm) classDefinition.newInstance();
+		
+		} catch (InstantiationException e) {
+			if(debug) System.out.println(e);
+		} catch (IllegalAccessException e) {
+			if(debug) System.out.println(e);
+		} catch (ClassNotFoundException e) {
+			if(debug) System.out.println(e);
+		}
+		return castToIAlgorithm;
 	}
 }

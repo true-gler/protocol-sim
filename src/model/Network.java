@@ -131,7 +131,7 @@ public class Network{
 	public static String getNetworkOutput(){
 		String str = "", type ="", key ="";
 		
-		str+= "Protocol: ";
+		str+= "Protocol:";
 		str += protocol.toString() + "\n";
 		
 		

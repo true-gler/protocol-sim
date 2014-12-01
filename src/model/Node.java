@@ -86,7 +86,7 @@ public class Node implements INode {
 			return (Event)eFinish;	
 		}
 		
-		double pForward = (double) Network.getInstance().getProbabilityForward();			
+		double pForward = Double.parseDouble(Network.getParameter("pf").toString());		
 		double pRandom  = getSecureRandomNumber();
 		
 		/**
@@ -189,39 +189,7 @@ public class Node implements INode {
 	public String toString(){
 		return " id: " + this.getId();
 	}
-	@Override
-	public ArrayList<RXEvent> broadcast(Node initNode) {
-		// TODO A broadcast will send a message to every Node in the network
-		Network n = Network.getInstance();
-		ArrayList<RXEvent> events = new ArrayList<RXEvent>();
-		ArrayList<Node> nodes = new ArrayList<>();
-		nodes = n.getAllNodes();
-		int i = 0;
-		while (i < nodes.size()){
-			if(i != initNode.getId()){
-				RXEvent rx = new RXEvent(initNode, nodes.get(i));
-				events.add(rx);
-				i++;
-			}
-		}
-		
-		return events;
-	}
-	@Override
-	public ArrayList<RXEvent> multicast(Node initNode, ArrayList<Node> receivers) {
-		// TODO A multicast will send a message to selected Nodes in the network
-		ArrayList<RXEvent> events = new ArrayList<>();
-		int i = 0;
-		while(i < receivers.size()){
-			if(receivers.get(i).getId() != initNode.getId()){
-			RXEvent rx = new RXEvent(initNode, receivers.get(i));
-			events.add(rx);
-			i++;
-			}
-		}
-		
-		return events;
-	}
+
 	public float getSecureRandomNumber(){
 	  	  SecureRandom random = new SecureRandom();	      
 		  return random.nextFloat();

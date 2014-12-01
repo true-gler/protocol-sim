@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainController">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="312.0" prefWidth="373.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
    </columnConstraints>
@@ -36,7 +36,7 @@
             <Label fx:id="tfMessage" alignment="CENTER" prefHeight="15.0" prefWidth="519.0" textAlignment="CENTER" BorderPane.alignment="CENTER" />
          </bottom>
          <center>
-            <GridPane alignment="TOP_CENTER" prefHeight="91.0" prefWidth="306.0" BorderPane.alignment="CENTER">
+            <GridPane alignment="TOP_CENTER" prefHeight="218.0" prefWidth="273.0" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.0" minWidth="10.0" prefWidth="80.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="159.0" minWidth="0.0" prefWidth="44.0" />
@@ -53,9 +53,9 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="bRead" mnemonicParsing="false" onAction="#readFile" prefHeight="25.0" prefWidth="126.0" text="read from file" textAlignment="CENTER" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <Button fx:id="bGenerate" mnemonicParsing="false" onAction="#goToGeneratingGUI" prefHeight="25.0" prefWidth="128.0" text="generate" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                  <Label prefHeight="15.0" prefWidth="49.0" text="Network" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="bRead" mnemonicParsing="false" onAction="#readFile" prefHeight="40.0" prefWidth="150.0" text="read network from file" textAlignment="CENTER" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Button fx:id="bGenerate" mnemonicParsing="false" onAction="#goToGeneratingGUI" prefHeight="40.0" prefWidth="150.0" text="generate network" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Label text="Network generation" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>

@@ -3,6 +3,10 @@
  */
 package controller;
 
+import interfaces.IAlgorithm;
+import interfaces.INode;
+import interfaces.IProtocol;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -12,7 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-
+import exceptions.AlgorithmNotFoundException;
 import exceptions.NodeTypeNotFoundException;
 import model.Network;
 import model.Node;
@@ -23,11 +27,15 @@ import model.ReachableList;
  *  Input Parser - reads in the file that contains the Nodes 
  *  
  *  example File:
- *  
+ *  Protocol: Crowds
+ *  Algorithm: Dijkstra
+ *  Paramter 
+ *  pf 0.8
+ *  -
  *  0 Node
  *  1 Node
  *  2 Foe 
- *
+ *	-
  *	0 1 10
  *  0 2 20
  *  1 2 30
@@ -73,11 +81,81 @@ public class InputParser {
 		double latency;
 		String[] buffer = null ; 
 		Network network;
+		
 		/**
 		 * Reads the first Section of the file with the node definitions 
 		 */
 		try{
 			BufferedReader reader = Files.newBufferedReader(path, ENCODING);
+			line = reader.readLine();
+			
+			while (line != null && !line.startsWith("-")) {
+				if(!line.startsWith("#")){
+					/**
+					 * Generate the algorithm object due to the given string
+					 */
+				
+					if(line.startsWith("Algorithm")){
+						buffer = line.split(":");
+						String classType = buffer[1].trim();
+						Object algorithm = createObjectAlgorithm(classType);						
+						if (algorithm == null){							
+							throw new AlgorithmNotFoundException();
+						} else {
+							Network.setAlgorithm(algorithm);						
+						}
+					} else if(line.startsWith("Protocol")){
+						buffer = line.split(":");
+						String classType = buffer[1].trim();
+						Object protocol = createObjectProtocol(classType);						
+						if (protocol == null){							
+							throw new AlgorithmNotFoundException();
+						} else {
+							Network.setProtocol(protocol);						
+						}
+					}
+					else if(line.startsWith("Parameter")){
+						line = reader.readLine();// Skip parameter
+					
+						while(!line.startsWith("-")){ // DO until the end of section
+						
+							buffer = line.split(" ");
+							/**
+							 * buffer[0] : name of the object
+							 * buffer[1] : value of the object
+							 */
+							name = buffer[0].trim();
+							String stringValue = buffer[1];
+							
+							// type cast error = String
+							// type cast success = float
+							
+							try {
+								float value = Float.parseFloat(stringValue);
+								Network.addParameter(name, value);	
+							} catch (Exception e) {							
+								// TODO Auto-generated catch block
+								String value = stringValue;
+								Network.addParameter(name, value);	
+								if(debug) e.printStackTrace();
+							}
+							line = reader.readLine();
+						}
+						break; //go to section 2
+					}
+				} 
+				line = reader.readLine(); 
+			}
+		
+		
+			
+			
+		/**
+		 * Reads the second Section of the file with the node definitions 
+		 */
+			
+			
+				
 			line = reader.readLine();
 			
 			while (line != null && !line.startsWith("-")) {
@@ -91,7 +169,7 @@ public class InputParser {
 					type = "model." + buffer[1];
 					name = buffer[1];
 					
-					Node node = createObject(type);
+					INode node = createObjectNode(type);
 					/**
 					 * In the case that the given class in the textfile is wrong
 					 */
@@ -102,7 +180,7 @@ public class InputParser {
 					node.setId(id);
 					node.setName(name);
 				
-					allNodes.add(id, node);
+					allNodes.add(id, (Node) node);
 					
 					
 					/**
@@ -114,8 +192,11 @@ public class InputParser {
 				}
 				line = reader.readLine();
 			}	
+			
+			
+			
 			/**
-			 * Read the second section (connections and latency) of the file
+			 * Read the first section (connections and latency) of the file
 			 */
 			line = reader.readLine();
 			buffer = line.split(" ");
@@ -167,7 +248,7 @@ public class InputParser {
 	
 		//Everything worked fine now return the thing
 		
-	    network = Network.getInstance();
+		network = Network.getInstance();
 		Network.setAllNodes(allNodes);
 		Network.setNodesToReach(nodesToReach);	
 		
@@ -177,11 +258,11 @@ public class InputParser {
 	}
 	
 	
-	private Node createObject(String type){
-		Object object = null;
+	private INode createObjectNode(String type){		
+		INode castToINode = null;
 		try {
 			Class classDefinition = Class.forName(type);			
-			object = classDefinition.newInstance();
+			castToINode = (INode) classDefinition.newInstance();			
 		} catch (InstantiationException e) {
 			if(debug) System.out.println(e);
 		} catch (IllegalAccessException e) {
@@ -189,7 +270,41 @@ public class InputParser {
 		} catch (ClassNotFoundException e) {
 			if(debug) System.out.println(e);
 		}
-		return (Node) object;
+		return castToINode;
 	}
+	
+	private IProtocol createObjectProtocol(String type){		
+		IProtocol castToIProtocol = null;
+		try {
+			Class classDefinition = Class.forName("protocol." + type);			
+			castToIProtocol = (IProtocol) classDefinition.newInstance();
+		
+		} catch (InstantiationException e) {
+			if(debug) System.out.println(e);
+		} catch (IllegalAccessException e) {
+			if(debug) System.out.println(e);
+		} catch (ClassNotFoundException e) {		
+			if(debug) System.out.println(e);
+		}
+		return castToIProtocol;
+	}
+	
+	private IAlgorithm createObjectAlgorithm(String type){
+		
+		IAlgorithm castToIAlgorithm = null;
+		try {
+			Class classDefinition = Class.forName("algorithm." + type);			
+			castToIAlgorithm = (IAlgorithm) classDefinition.newInstance();
+		
+		} catch (InstantiationException e) {
+			if(debug) System.out.println(e);
+		} catch (IllegalAccessException e) {
+			if(debug) System.out.println(e);
+		} catch (ClassNotFoundException e) {
+			if(debug) System.out.println(e);
+		}
+		return castToIAlgorithm;
+	}
+
 
 }

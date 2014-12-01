@@ -43,19 +43,6 @@
                         <Tooltip text="receiving node (end node) of the communication" />
                      </tooltip>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="103.0" text="p-forward" GridPane.rowIndex="2">
-                     <tooltip>
-                        <Tooltip text="Probability to forward to the next node into the crowd. (1-p) is the probability to forward to the receiver (end node)" />
-                     </tooltip>
-                  </Label>
-                  <TextField fx:id="tfForward" text="0.7" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <GridPane.margin>
-                        <Insets top="5.0" />
-                     </GridPane.margin>
-                  </TextField>
                   <TextField fx:id="tfPacket" text="Enter a package text" GridPane.columnIndex="3" GridPane.columnSpan="2147483647">
                      <opaqueInsets>
                         <Insets />

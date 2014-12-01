@@ -68,7 +68,7 @@ public class FoeCrowdsCP extends Node{
 			return (Event)eFinish;	
 		}
 		
-		double pForward = (double) Network.getInstance().getProbabilityForward();			
+		double pForward = Double.parseDouble(Network.getParameter("pf").toString());
 		double pRandom  = getSecureRandomNumber();
 		
 		/**

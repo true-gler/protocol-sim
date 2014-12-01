@@ -120,8 +120,6 @@ public class SimulationController implements Initializable {
 	@FXML
 	private void startSimulation() {
 		if (checkInputs()) {
-			Network.setProbabilityForward(Float.parseFloat(tfForward.getText()
-					.toString()));
 			tfMessage.setText("Simulation started");
 
 			Network n = Network.getInstance();
@@ -189,10 +187,8 @@ public class SimulationController implements Initializable {
 		try {
 			Integer.parseInt(tfReceiver.getText().toString());
 			Integer.parseInt(tfSender.getText().toString());
-			Integer.parseInt(tfSimulations.getText().toString());
-			Float.parseFloat(tfForward.getText().toString());
-			if (tfForward.getText().trim() == ""
-					|| tfPacket.getText().trim() == ""
+			Integer.parseInt(tfSimulations.getText().toString());		
+			if (tfPacket.getText().trim() == ""
 					|| tfReceiver.getText().trim() == ""
 					|| tfSender.getText().trim() == ""
 					|| tfSimulations.getText().trim() == "") {

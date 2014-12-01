@@ -1,4 +1,9 @@
-#This is a comment
+Protocol: Crowds
+Algorithm: Dijkstra
+Parameter:
+pf 0.8
+test asdf
+-
 0 Node
 1 Node
 2 Node
@@ -94,3 +99,22 @@
 19 25 88
 9 19 181
 9 20 20
+# usage
+# # this is a comment
+# - sperator of sections
+# The file must contain three sections
+# 1. algorithm and parameters
+# 2. nodes in the network (have to be named after the class)
+# 3. connections between the nodes
+#
+# This is the section holds the used algorithm and the network parameters 
+# used by the nodes for your protocol
+#
+# Protocol: <yourProtocol> (have to be an existing class in package, type sensitive)
+# Algorithm: <yourAlgorithm> (have to be an existing class, type sensitive)
+# Parameter:
+# <your parameter>
+# <the next parameter>
+#
+# the object in your network can be accessed with Network.getParameter
+#

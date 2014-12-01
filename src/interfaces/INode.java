@@ -14,6 +14,7 @@ import model.Paket;
  */
 public interface INode{
 
+	
 	public Event receive(Node initNode, Node nextNode, Paket p);
 	
 	public Event receiveLayer3(Node initNode, Node nextNode, Node receiver, Paket p);
@@ -28,21 +29,12 @@ public interface INode{
 	/** hier evtl Broadcast */
 
 	public RXEvent transmitLayer3 (Node initNode, Node nextNode, Paket p);
-	
-	public ArrayList<RXEvent> broadcast(Node initNode);
-	
-	/*
-	 * multicast needs to be checked, we need a different number of functions,
-	 * since we need a different number of Nodes to mulitcast to.
-	 * What happens to the multicast
-	 * public abstract ArrayList<RXEvent> multicast(Node initNode, Node 1, Node 2)
-	 */
-		
-	public ArrayList<RXEvent> multicast (Node initNode, ArrayList<Node> receivers);
-	
-	//add transmitLayer3 and receiveLayer3 abstract method to the interface of INODE
-
-
+	public Paket getP();
+	public void setP(Paket p);
+	public String getName();
+	public void setName(String name);
+	public int getId();
+	public void setId(int id);
 }
 
 

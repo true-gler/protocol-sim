@@ -1,10 +1,14 @@
 package controller;
 
+import interfaces.IAlgorithm;
+import interfaces.IProtocol;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
+import algorithm.Dijkstra;
 import model.Network;
 import model.Node;
 import model.Paket;
@@ -23,19 +27,19 @@ public class EventHandler {
 
 	/* Event data */
 	private PriorityQueue<Event> queue;
-	private Network network = null;
 	private static EventHandler instance = null;
 	
 	/* Messages and Debugging */
 	private static boolean debug = false;
 	
 	/* Nodes */
-	private Node startNode;
-	private Node endNode;
-	private Paket paket;
+	private static Node startNode;
+	private static Node endNode;
+	private static Paket paket;
 
-	private Dijkstra dijkstra = new Dijkstra();
-	private LinkedList<Node> listForComm;
+	private IAlgorithm algorithm;
+	private IProtocol protocol;
+	private LinkedList<Node> listForCommunication;
 	
 	/* Logging */
 	private static LogHandler lh;
@@ -46,7 +50,7 @@ public class EventHandler {
 	 * 
 	 * The Hashmap to store the processed HashMaps (Paths) for every node
 	 */
-	private static HashMap<Node, HashMap> allProcessedNodes;
+	private static HashMap<Node, HashMap> processedNodesWithAlgorithm;
 
 	public static EventHandler getInstance(Node initNode, Node endNode, Paket paket) {
 		if (instance == null) {
@@ -56,14 +60,15 @@ public class EventHandler {
 	}
 
 	public EventHandler(Node initNode, Node endNode, Paket paket) {
-		queue = new PriorityQueue<Event>();
-		setNetwork(Network.getInstance());
-		allProcessedNodes = new HashMap<Node, HashMap>();
+		queue = new PriorityQueue<Event>();		
+		processedNodesWithAlgorithm = new HashMap<Node, HashMap>();
 		this.setStartNode(initNode);
 		this.setEndNode(endNode);
 		this.setPaket(paket);
 		startNode.setP(paket);
 		lh = LogHandler.getInstance();
+		algorithm = (IAlgorithm) Network.getAlgorithm();
+		protocol = (IProtocol) Network.getProtocol();
 	}
 
 	
@@ -104,7 +109,7 @@ public class EventHandler {
 					lh.appendData(output);
 					
 					if (e instanceof SimulationFinishedEvent) {
-						this.executeEvent(e);
+						this.executeEvent(e);						
 						return false;
 					}
 					else
@@ -117,33 +122,11 @@ public class EventHandler {
 		} finally {
 			long end = System.currentTimeMillis();
 			System.out.println((end - begin) + "ms");
-			if(Network.collabAL.size() > 0){
-				lh.appendData("\nThe following Nodes have been unmasked by the collaborating Nodes\n");
-				for (int i = 0; i < Network.collabAL.size(); i++){
-					lh.appendData(Network.collabAL.get(i).toString() + "\n");					
-				}
-				if(Network.collabAL.get(0) == startNode){
-					lh.appendData("\n!PROOF Unvieled the initiator of the Communication \n");
-					System.out.println("\n!PROOF Unvieled the initiator of the Communication \n");
-					int collabAmount = Network.getInstance().getTypeOfNode("model.FoeCrowdsCOLLAB");
-					float probForward = Network.getInstance().getProbabilityForward();
-					
-					/**
-					 * Beweisbare unschuld gegeben (probable innocence) aber verletzt, da 
-					 * startknoten herausgefunden, siehe Crowds Theorem 5.2 
-					 */
-					if(collabAmount > 0){
-						if(Network.getInstance().getAllNodes().size() >= (probForward/(probForward-0.5))*
-								(collabAmount +1)){
-							System.out.println("PROOF: Probable innocence according to the paper violated");
-							System.out.println("\nProbable innocence given but violated by collaborating foes\n");
-							lh.appendData("Probable innocence according to the paper violated");
-							lh.appendData("\nProbable innocence given but violated by collaborating foes\n");
-						}
-					}
-						
-					}
-			}
+			
+			
+			protocol.executePostSimulation(null);
+			
+			
 			lh.writeTotalTime((end-begin));
 		}
 		return true;
@@ -169,7 +152,8 @@ public class EventHandler {
 		
 		if (e instanceof SimulationFinishedEvent) {
 			// Invokes the last receive
-			rNode.receive(sNode,rNode, rNode.getP());			
+			rNode.receive(sNode,rNode, rNode.getP());
+			protocol.executeFinished(null);
 		}
 		/**
 		 * receive
@@ -184,8 +168,8 @@ public class EventHandler {
 			 * Layer 3 is different because no random choose of the next destination -> it takes the next out of the list
 			 */
 			else{
-				if(listForComm.size() > 0){
-				Event ev = rNode.receiveLayer3(sNode, rNode, listForComm.pollFirst(), sNode.getP()); 
+				if(listForCommunication.size() > 0){
+				Event ev = rNode.receiveLayer3(sNode, rNode, listForCommunication.pollFirst(), sNode.getP()); 
 				// if pollLast returns null then there is no node left in the listForComm and the returning Event(ev) is a L7 RX Event
 				this.addEvent(ev);
 				}
@@ -195,6 +179,8 @@ public class EventHandler {
 					this.addEvent(ev);
 				}
 			}
+			
+			protocol.executeRX(null);
 
 			/**
 			 * Layer 7 events are splitted to L3 Events Layer 7 events don't get
@@ -217,31 +203,31 @@ public class EventHandler {
 					/** holds the path to go for
 					* layer 3 but in reverse order
 					*/
-					
-					listForComm = null; 
+					/************************************************************************/
+					listForCommunication = null; 
 					try {
-						if (allProcessedNodes.get(sNode).get(rNode) != null) {
-							listForComm = (LinkedList) allProcessedNodes.get(sNode).get(rNode); // Get the path if it exists for
+						if (processedNodesWithAlgorithm.get(sNode).get(rNode) != null) {
+							listForCommunication = (LinkedList) processedNodesWithAlgorithm.get(sNode).get(rNode); // Get the path if it exists for
 											// this node
 						}
 					} catch (NullPointerException ex) {
-						allProcessedNodes.put(sNode, dijkstra.getShortestPaths(sNode));
+						processedNodesWithAlgorithm.put(sNode, algorithm.getPath(sNode));
 						// Process the Dijkstra for the node to get the path
 						
-						listForComm = (LinkedList) allProcessedNodes.get(sNode).get(
+						listForCommunication = (LinkedList) processedNodesWithAlgorithm.get(sNode).get(
 								rNode); // and the the path
 					}
 					
-					System.out.println(listForComm.toString());
+					System.out.println(listForCommunication.toString());
 					
 					/**
 					 * invoking L3 Event for Layer 3 communication
 					 * the list of dijkstra nodes to go simply becomes shorter
 					 */
 					
-					if(listForComm.size() > 1){
-						Node firstDijkstraNode = listForComm.pollFirst();
-						Node nodeToSendTo = listForComm.pollFirst();					
+					if(listForCommunication.size() > 1){
+						Node firstDijkstraNode = listForCommunication.pollFirst();
+						Node nodeToSendTo = listForCommunication.pollFirst();					
 						firstDijkstraNode.setP(sNode.getP());
 						TXEvent eFirst = new TXEvent(firstDijkstraNode, nodeToSendTo);
 						eFirst.setLayer7Flag(false); //Layer 3
@@ -269,6 +255,8 @@ public class EventHandler {
 				eLayer3.setLayer7Flag(false);
 				this.addEvent(eLayer3);
 			}
+			
+			protocol.executeTX(null);
 		}
 		else { // Dieser Fall sollte nicht eintreten
 				System.out.println("!!!!!!!!! unknown Event!?");
@@ -326,34 +314,26 @@ public class EventHandler {
 	
 
 	
-	/**
-	 * Instantiates the network for communication
-	 * 
-	 * @param network
-	 */
-	public void setNetwork(Network network) {
-		this.network = network;
-	}
-	public Node getStartNode() {
+	public static Node getStartNode() {
 		return startNode;
 	}
-	public void setStartNode(Node startNode) {
-		this.startNode = startNode;
+	public static void setStartNode(Node startNode) {
+		EventHandler.startNode = startNode;
 	}
-	public Node getEndNode() {
+	public static Node getEndNode() {
 		return endNode;
 	}
 
-	public void setEndNode(Node endNode) {
-		this.endNode = endNode;
+	public static void setEndNode(Node endNode) {
+		EventHandler.endNode = endNode;
 	}
 
-	public Paket getPaket() {
+	public static Paket getPaket() {
 		return paket;
 	}
 
-	public void setPaket(Paket paket) {
-		this.paket = paket;
+	public static void setPaket(Paket paket) {
+		EventHandler.paket = paket;
 	}
 
 

@@ -28,27 +28,6 @@ public class FoeCrowdsDOS extends Node{
 		super.setId(id);
 	}
 	
-	//public Event receive(RXEvent e, Paket p){
-		
-		/** 
-		 * Print the usual receiving a packet dialogue
-		 */
-		/*System.out.println("Receive: \tNode: " + this.getName() + " received Packet: " + p.getId() +
-				"  with payload: '" + p.getPayload() + "'");
-		
-		/**
-		 * Well now we have the paket. 
-		 * 
-		 * It would be a shame if your paket wouldn't get delivered! 
-		 * But well. Those things can happen... #pureEvil
-		 */
-	/*
-		SimulationFinishedEvent simFin = new SimulationFinishedEvent()
-		
-		RXEvent rxe = new RXEvent(null, null);
-		return rxe;
-	}*/
-	
 	public Event receive(Node sNode, Node rNode, Paket p) {
 
 		/** PacketList FIFO */

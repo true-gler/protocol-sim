@@ -1,4 +1,6 @@
-package controller;
+package algorithm;
+
+import interfaces.IAlgorithm;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +21,7 @@ import model.ReachableNodes;
  *		m is the number of edges (or in our case number of connections)
  */		
 
-public class Dijkstra {
+public class Dijkstra implements IAlgorithm{
 
 	/**
 	 * A dijkstraTripel is the implementation of the "datastructure" used in the AlogDat slides.
@@ -76,7 +78,7 @@ public class Dijkstra {
 	 *         every node in the network.
 	 */
 	
-	public HashMap<Node, LinkedList<Node>> getShortestPaths(Node nForPath) {
+	public HashMap<Node, LinkedList<Node>> getPath(Node nForPath) {
  
 		//Fetch the network
 		Network n = Network.getInstance();

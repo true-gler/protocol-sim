@@ -66,7 +66,7 @@ public class FoeCrowdsCOLLAB extends Node{
 			return (Event)eFinish;	
 		}
 		
-		double pForward = (double) Network.getInstance().getProbabilityForward();			
+		double pForward = (double) Network.getInstance().getParameter("pf");		
 		double pRandom  = getSecureRandomNumber();
 		
 		/**

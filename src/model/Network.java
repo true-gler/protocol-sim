@@ -135,7 +135,7 @@ public class Network{
 		str += protocol.toString() + "\n";
 		
 		
-	    str+= "Algorithm: ";
+	    str+= "Algorithm:";
 	    str += algorithm.toString() + "\n";
 			
 		str+= "Parameter:\n";

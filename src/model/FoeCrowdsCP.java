@@ -46,7 +46,7 @@ public class FoeCrowdsCP extends Node{
 		
 		TXEvent startEvent = new TXEvent(this, receiver);
 		startEvent.setLayer7Flag(true); //The initial Event is on Layer7, followed by L3 events
-		System.out.println("Start Communication from: " + this.getName() + " to: " + receiver.getName());
+		System.out.println("Start Communication from: " + this.getId() + " to: " + receiver.getId());
 		return startEvent;	
 	}
 	

@@ -86,9 +86,11 @@ public class Dijkstra implements IAlgorithm{
 		
 		} catch (NullPointerException ex) {			
 			processedNodesWithAlgorithm.put(startNode, getDijkstraCollection(startNode));
-			ll = (LinkedList) processedNodesWithAlgorithm.get(startNode).get(endNode); // and the the path
-							
+			ll = (LinkedList) processedNodesWithAlgorithm.get(startNode).get(endNode); // and the the path							
 		}	
+		if(ll == null || ll.size() == 0){
+			System.out.println("asdf" + getDijkstraCollection(startNode).toString() + "start" + startNode + "End" + endNode);
+		}
 		return ll;
 			
 	}

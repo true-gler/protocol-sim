@@ -201,10 +201,7 @@ public class EventHandler {
 					*/
 					/***************************FEHLER*********************************************/
 					 
-					listForCommunication = algorithm.getPath(sNode, rNode);			
-					if(listForCommunication == null || listForCommunication.size() == 0){
-						System.out.println("asdf");
-					}
+					listForCommunication = algorithm.getPath(sNode, rNode);								
 					System.out.println(listForCommunication.toString());
 					
 					/**

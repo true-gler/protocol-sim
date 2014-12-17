@@ -53,19 +53,8 @@ public class FoeCrowdsDOS extends Node{
 	 * This is probably useless since a foe wouldn't really send something through the network
 	 */
 	public TXEvent startCommunication(){
-		/**
-		 * Get a random node from all existing, to start the communication with
-		 */
-		
-		Network network = Network.getInstance();
-		int n = (int) (getSecureRandomNumber() * network.getAllNodes().size());
-		Node receiver = network.getAllNodes().get(n);
-		
-		TXEvent startEvent = new TXEvent(this, receiver);
-		startEvent.setLayer7Flag(true); //The initial Event is on Layer7, followed by L3 events
-		System.out.println("Start Communication from: " + this.getName() + " to: " + receiver.getName());
-		return startEvent;
-		
+
+		return null;
 	}
 	
 	

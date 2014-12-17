@@ -116,6 +116,7 @@ public class NetworkGenerator {
 				return false;
 			if (!barabasi())
 				return false;
+			checkBarabasi();
 		} else {
 			if (!generateRandom())
 				return false;
@@ -124,6 +125,27 @@ public class NetworkGenerator {
 		Network.setAllNodes(allNodes);
 		Network.setNodesToReach(nodesToReach);
 		return true;
+	}
+
+	/**
+	 * It could be that the barabasi generates subnetworks, here check it again
+	 */
+	private void checkBarabasi() {
+		int to, lat;
+		float latency, f, t;
+		latency = getSecureRandomNumber() * 100;
+		lat = (int) latency;
+		t = getSecureRandomNumber() * totalAmount;
+		to = (int) t;
+				
+		for(int i = 0; i < totalAmount; i ++){
+			if(nodesToReach.get(i).getLl().size() <= 1){
+				nodesToReach.get(i).addReachable(allNodes.get(to), lat);
+				nodesToReach.get(to).addReachable(allNodes.get(i), lat);
+					
+			}
+		}
+		
 	}
 
 	/**
@@ -195,8 +217,7 @@ public class NetworkGenerator {
 		int lat;
 		float latency;
 		int i;
-		for (i = length; i < totalAmount; i++) {
-			System.out.println("i " + i);
+		for (i = length; i < totalAmount; i++) {			
 			int count = 0; 
 			for (int j = 0; j < i; j++) {
 				float probAdd = getSecureRandomNumber();
@@ -216,7 +237,7 @@ public class NetworkGenerator {
 					lat = (int) latency;
 					try {
 						
-						System.out.println("j " + j);
+						
 						nodesToReach.get(j).addReachable(allNodes.get(i),lat);
 						nodesToReach.get(i).addReachable(allNodes.get(j),lat);					
 						

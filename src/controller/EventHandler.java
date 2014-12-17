@@ -79,6 +79,12 @@ public class EventHandler {
 		 * Let the node choose which the next node is
 		 */	
 		TXEvent startEvent = getStartNode().startCommunication();
+		if(startEvent == null) //DoS foe 
+		{
+			System.out.println("Communication stopped, no Event");
+			lh.appendData("Communication stopped, no Event");
+			return false;
+		}
 		startEvent.setLayer7Flag(true); //The initial Event is on Layer7, followed by L3 events
 		this.addEvent(startEvent);
 
@@ -235,7 +241,7 @@ public class EventHandler {
 					}
 
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
+				
 					e1.printStackTrace();
 				}
 			}
@@ -243,15 +249,21 @@ public class EventHandler {
 			 * Layer3 just execute 
 			 */
 			else {
-				RXEvent eLayer3 = rNode.transmitLayer3(sNode, rNode, sNode.getP());
-				eLayer3.setLayer7Flag(false);
-				this.addEvent(eLayer3);
+				
+				try {
+					RXEvent eLayer3 = rNode.transmitLayer3(sNode, rNode, sNode.getP());
+					eLayer3.setLayer7Flag(false);
+					this.addEvent(eLayer3);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			
 			protocol.executeTX(null);
 		}
 		else { // Dieser Fall sollte nicht eintreten
-				System.out.println("!!!!!!!!! unknown Event!?");
+				System.out.println("!! unknown Event!?");
 		}
 
 		if (debug) {

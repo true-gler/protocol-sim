@@ -122,13 +122,12 @@ public class SimulationController implements Initializable {
 	@FXML
 	private void startSimulation() {
 		if (checkInputs()) {
-			tfMessage.setText("Simulation started");
+			
 
 			Network n = Network.getInstance();
 			int receiverNr = Integer.parseInt(tfReceiver.getText().toString());
 			int initNodeNr = Integer.parseInt(tfSender.getText().toString());
-			EventHandler.setEndNode(n.getAllNodes().get(receiverNr));
-			EventHandler.setStartNode(n.getAllNodes().get(initNodeNr));
+			
 			if (n.getNetwork() != null) {
 				int size = 0;
 				try {
@@ -137,8 +136,11 @@ public class SimulationController implements Initializable {
 					tfMessage.setText("First read a file");
 				}
 				if (receiverNr <= size && initNodeNr < size && initNodeNr >= 0) {
+					tfMessage.setText("Simulation started");
 					Node initNode = n.getAllNodes().get(initNodeNr);
 					Node receiver = n.getAllNodes().get(receiverNr);
+					EventHandler.setEndNode(n.getAllNodes().get(receiverNr));
+					EventHandler.setStartNode(n.getAllNodes().get(initNodeNr));
 					try {
 						System.out
 								.println("L7 | Want to send a Package form: "
@@ -173,10 +175,12 @@ public class SimulationController implements Initializable {
 						e.printStackTrace();
 					}
 				}
-			} else
-				tfMessage.setText("Specify the correct Target/Send node");
-		} else {
-			// tfMessage.setText("Please check your inputs");
+				else
+					tfMessage.setText("Specify the correct Target/Send node");
+			}
+			}
+		else {
+			tfMessage.setText("Please check your inputs");
 		}
 	}
 

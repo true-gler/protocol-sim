@@ -77,7 +77,7 @@ public class Dijkstra implements IAlgorithm{
 	public LinkedList<Node> getPath(Node startNode, Node endNode){
 		LinkedList<Node> ll = new LinkedList<Node>();
 		HashMap<Node, LinkedList<Node>> hm = getDijkstraCollection(startNode);
-		
+		processedNodesWithAlgorithm = new HashMap<Node, HashMap>();
 		try {
 			if (processedNodesWithAlgorithm.get(startNode).get(endNode) != null) {
 				// Get the path if it exists for

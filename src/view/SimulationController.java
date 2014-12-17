@@ -77,7 +77,7 @@ public class SimulationController implements Initializable {
 	private static InputParser ip = InputParser.getInstance();
 	private Stage primaryStage;
 	private LogHandler lg;
-
+	private int simulationCount = 0;
 	public void initialize(URL location, ResourceBundle resources) {
 		lLogDir.setText("output in " + System.getProperty("user.dir") +  "/Logs");
 		taNetwork.setText(Network.getNetworkOutput());
@@ -149,6 +149,7 @@ public class SimulationController implements Initializable {
 							Paket p = new Paket(1, tfPacket.getText());
 							sim = new Simulator(initNode, receiver, p);
 							sim.startSimulation();
+							simulationCount++;
 						}
 						
 						
@@ -164,7 +165,7 @@ public class SimulationController implements Initializable {
 						    });
 						LogList.addAll(names);
 						lvLog.setItems(LogList);	
-						tfMessage.setText("Simulation finished");
+						tfMessage.setText("Simulation "  + simulationCount + " finished");
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

@@ -14,7 +14,7 @@
       <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <BorderPane prefHeight="300.0" prefWidth="300.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+      <BorderPane prefHeight="1000.0" prefWidth="1000.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
          <top>
             <MenuBar fx:id="mbMenuBar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <menus>
@@ -53,8 +53,8 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="bRead" mnemonicParsing="false" onAction="#readFile" prefHeight="40.0" prefWidth="150.0" text="read network from file" textAlignment="CENTER" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <Button fx:id="bGenerate" mnemonicParsing="false" onAction="#goToGeneratingGUI" prefHeight="40.0" prefWidth="150.0" text="generate network" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Button fx:id="bRead" mnemonicParsing="false" onAction="#readFile" prefHeight="40.0" prefWidth="200.0" text="read network from file" textAlignment="CENTER" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Button fx:id="bGenerate" mnemonicParsing="false" onAction="#goToGeneratingGUI" prefHeight="40.0" prefWidth="200.0" text="generate network" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                   <Label text="Network generation" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets />

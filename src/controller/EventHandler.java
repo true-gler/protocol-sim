@@ -202,7 +202,15 @@ public class EventHandler {
 					/***************************FEHLER*********************************************/
 					 
 					listForCommunication = algorithm.getPath(sNode, rNode);								
-					System.out.println(listForCommunication.toString());
+					if(listForCommunication == null) {
+						lh.appendData("Node cannot be reached");
+						System.out.println("Node cannot be reached");
+						//this.addEvent(new SimulationFinishedEvent(System.currentTimeMillis()));
+					} 
+					
+					else {
+						System.out.println(listForCommunication.toString());
+					
 					
 					/**
 					 * invoking L3 Event for Layer 3 communication
@@ -210,10 +218,10 @@ public class EventHandler {
 					 */
 					
 					if(listForCommunication.size() > 1){
-						Node firstDijkstraNode = listForCommunication.pollFirst();
+						Node firstNode = listForCommunication.pollFirst();
 						Node nodeToSendTo = listForCommunication.pollFirst();					
-						firstDijkstraNode.setP(sNode.getP());
-						TXEvent eFirst = new TXEvent(firstDijkstraNode, nodeToSendTo);
+						firstNode.setP(sNode.getP());
+						TXEvent eFirst = new TXEvent(firstNode, nodeToSendTo);
 						eFirst.setLayer7Flag(false); //Layer 3
 						this.addEvent(eFirst);
 					} else /*
@@ -224,7 +232,7 @@ public class EventHandler {
 						eFirst.setLayer7Flag(true); //Layer 7
 						this.addEvent(eFirst);
 					}
-						
+					}
 
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block

@@ -56,7 +56,7 @@ public class NetworkGenerator {
 		ArrayList<Integer> amount = new ArrayList<Integer>();
 		float p = 0;
 		totalAmount = totalNodeAmount;
-		float le = totalAmount / 20;
+		float le = totalAmount / 10;
 		length = (int) le;
 
 		
@@ -194,37 +194,44 @@ public class NetworkGenerator {
 	private boolean barabasi() {
 		int lat;
 		float latency;
-		for (int i = length; i < totalAmount; i++) {
+		int i;
+		for (i = length; i < totalAmount; i++) {
+			System.out.println("i " + i);
+			int count = 0; 
 			for (int j = 0; j < i; j++) {
 				float probAdd = getSecureRandomNumber();
 				float p_i = nodesToReach.get(j).getLl().size(); 
-				//Boolean value that is used in the generation to see if a node should be added or not
-				boolean allowConnection = false;
-				//check if the maximum number of connections is allready reache
-				if(p_i < maxNodeDegree){
-					allowConnection = true;
-				}
-				p_i /= totalConn; 
+							
 				
+				p_i = p_i / totalConn; 
+				//System.out.println("probAdd " + probAdd + " <  p_i" + p_i + (probAdd <= p_i || p_i == 0) + " allow "  + allowConnection);
 				/*
 				 * if the random number probAdd is bigger than p_i, the ratio of connections in a node 
 				 * by the number of total connections
 				 * p_i == 0 is used to determine if a node has no connections so far
 				 */
-				if ((probAdd <= p_i || p_i == 0) && allowConnection) {
+				
+				   if ((probAdd <= p_i || p_i == 0)) { 
 					latency = getSecureRandomNumber() * 100;
 					lat = (int) latency;
 					try {
-						nodesToReach.get(j).addReachable(allNodes.get(i),
-								lat);
-						nodesToReach.get(i).addReachable(allNodes.get(j),
-								lat);
+						
+						System.out.println("j " + j);
+						nodesToReach.get(j).addReachable(allNodes.get(i),lat);
+						nodesToReach.get(i).addReachable(allNodes.get(j),lat);					
+						
+						
 					} catch (Exception e) {
+						e.printStackTrace();
 						return false;
 					}
+				
 					totalConn++;
-				}
-			}
+				   }
+				
+			}	
+			
+			
 		}
 
 		return true;

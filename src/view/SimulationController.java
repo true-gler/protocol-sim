@@ -17,9 +17,11 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.Network;
 import model.Node;
 import model.Paket;
+import controller.EventHandler;
 import controller.InputParser;
 import controller.LogHandler;
 import controller.Simulator;
+import event.Event;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -102,7 +104,7 @@ public class SimulationController implements Initializable {
 		lvLog.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 		    @Override
 		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-		    	openCSV(newValue);
+		    	
 		    }
 		});
 		
@@ -125,7 +127,8 @@ public class SimulationController implements Initializable {
 			Network n = Network.getInstance();
 			int receiverNr = Integer.parseInt(tfReceiver.getText().toString());
 			int initNodeNr = Integer.parseInt(tfSender.getText().toString());
-
+			EventHandler.setEndNode(n.getAllNodes().get(receiverNr));
+			EventHandler.setStartNode(n.getAllNodes().get(initNodeNr));
 			if (n.getNetwork() != null) {
 				int size = 0;
 				try {
@@ -213,23 +216,7 @@ public class SimulationController implements Initializable {
 	public void setStage(Stage stage) {
 		this.primaryStage = stage;
 	}
-	
-	public void openCSV(String file){
 
-		Desktop dt = Desktop.getDesktop();
-		
-		try { 
-			String path = System.getProperty("user.dir");
-			System.out.println("OPEN FILE TODO");
-		//File f = new File(path + "/Logs/"+file);
-			//dt.open(f);
-		//	Desktop.getDesktop().open(new File("/home/thomas/test.txt"));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
 	
 
 }

@@ -1,12 +1,28 @@
 package protocol;
 
+import java.io.IOException;
+
 import controller.EventHandler;
 import controller.LogHandler;
 import model.Network;
 import interfaces.IProtocol;
 
 public class Crowds implements IProtocol{
+	
+	private LogHandler lh;
+	
 
+	@Override
+	public void executePreSimulation(Object... object) {
+		// TODO Auto-generated method stub
+		try {
+			lh.writeHeader();
+		} catch (IOException e2) {
+			System.out.println("log write error");
+		}
+		
+	}	
+	
 	@Override
 	public void executeTX(Object... object) {
 		// TODO Auto-generated method stub
@@ -28,7 +44,7 @@ public class Crowds implements IProtocol{
 	@Override
 	public void executePostSimulation(Object... object) {
 
-		LogHandler lh = LogHandler.getInstance();
+		lh = LogHandler.getInstance();
 		if(Network.collabAL.size() > 0){
 			lh.appendData("\nThe following Nodes have been unmasked by the collaborating Nodes\n");
 			for (int i = 0; i < Network.collabAL.size(); i++){
@@ -59,5 +75,6 @@ public class Crowds implements IProtocol{
 		}
 		
 	}
+
 
 }

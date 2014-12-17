@@ -74,11 +74,8 @@ public class EventHandler {
 	
 	public boolean simulate(Network n) {
 		
-		try {
-			lh.writeHeader();
-		} catch (IOException e2) {
-			System.out.println("log write error");
-		}
+		protocol.executePreSimulation(null);
+		
 		/**
 		 * Let the node choose which the next node is
 		 */	
@@ -109,11 +106,11 @@ public class EventHandler {
 					lh.appendData(output);
 					
 					if (e instanceof SimulationFinishedEvent) {
-						this.executeEvent(e);						
+						executeEvent(e);									
 						return false;
 					}
 					else
-						this.executeEvent(e);
+						executeEvent(e);
 				}
 
 		} catch (Exception e1) {

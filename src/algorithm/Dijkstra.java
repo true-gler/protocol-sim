@@ -46,14 +46,7 @@ public class Dijkstra implements IAlgorithm{
 			return v;
 		}
 
-/*		public void setV(Node v) {
-			this.v = v;
-		}
 
-		public Node getPreviousV() {
-			return previousV;
-		}
-*/
 		public void setPreviousV(Node nextV) {
 			this.previousV = nextV;
 		}

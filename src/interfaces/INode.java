@@ -26,9 +26,11 @@ public interface INode{
 	 * @return 
 	 */
 	public RXEvent transmit(Node initNode, Node nextNode, Paket p);
-	/** hier evtl Broadcast */
 
 	public RXEvent transmitLayer3 (Node initNode, Node nextNode, Paket p);
+	
+	public TXEvent startCommunication();
+	
 	public Paket getP();
 	public void setP(Paket p);
 	public String getName();

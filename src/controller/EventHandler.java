@@ -50,7 +50,7 @@ public class EventHandler {
 	 * 
 	 * The Hashmap to store the processed HashMaps (Paths) for every node
 	 */
-	private static HashMap<Node, HashMap> processedNodesWithAlgorithm;
+	
 
 	public static EventHandler getInstance(Node initNode, Node endNode, Paket paket) {
 		if (instance == null) {
@@ -60,8 +60,7 @@ public class EventHandler {
 	}
 
 	public EventHandler(Node initNode, Node endNode, Paket paket) {
-		queue = new PriorityQueue<Event>();		
-		processedNodesWithAlgorithm = new HashMap<Node, HashMap>();
+		queue = new PriorityQueue<Event>();			
 		this.setStartNode(initNode);
 		this.setEndNode(endNode);
 		this.setPaket(paket);
@@ -201,20 +200,11 @@ public class EventHandler {
 					* layer 3 but in reverse order
 					*/
 					/***************************FEHLER*********************************************/
-					listForCommunication = null; 
-					try {
-						if (processedNodesWithAlgorithm.get(sNode).get(rNode) != null) {
-							listForCommunication = (LinkedList) processedNodesWithAlgorithm.get(sNode).get(rNode); // Get the path if it exists for
-											// this node
-						}
-					} catch (NullPointerException ex) {
-						processedNodesWithAlgorithm.put(sNode, algorithm.getPath(sNode));
-						// Process the Dijkstra for the node to get the path
-						
-						listForCommunication = (LinkedList) processedNodesWithAlgorithm.get(sNode).get(
-								rNode); // and the the path
+					 
+					listForCommunication = algorithm.getPath(sNode, rNode);			
+					if(listForCommunication == null || listForCommunication.size() == 0){
+						System.out.println("asdf");
 					}
-					
 					System.out.println(listForCommunication.toString());
 					
 					/**

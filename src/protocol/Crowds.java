@@ -9,7 +9,7 @@ import interfaces.IProtocol;
 
 public class Crowds implements IProtocol{
 	
-	private LogHandler lh;
+	private LogHandler lh = LogHandler.getInstance();
 	
 
 	@Override

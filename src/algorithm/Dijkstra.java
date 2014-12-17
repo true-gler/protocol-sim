@@ -12,7 +12,7 @@ import model.Node;
 import model.ReachableNodes;
 
 /**
- * @author Simon
+ * @author Simon, Thomas
  * 
  * The algorithm will need some improvements:
  *	- 	According to Wikipedia we should use a fibonacci-heap to get the complexity from
@@ -21,8 +21,14 @@ import model.ReachableNodes;
  *		m is the number of edges (or in our case number of connections)
  */		
 
-public class Dijkstra implements IAlgorithm{
 
+
+public class Dijkstra implements IAlgorithm{
+	private static HashMap<Node, HashMap> processedNodesWithAlgorithm;
+	
+	public Dijkstra(){
+		processedNodesWithAlgorithm = new HashMap<Node, HashMap>();
+	}
 	/**
 	 * A dijkstraTripel is the implementation of the "datastructure" used in the AlogDat slides.
 	 * it 
@@ -61,6 +67,32 @@ public class Dijkstra implements IAlgorithm{
 	}
 
 	/**
+	 * Gets the Path for the Communication
+	 * if dijkstra has already processed the node then it gets it out of the Collection
+	 * otherwise the dijkstra Algorithm is called
+	 * @param startNode
+	 * @param endNode
+	 * @return
+	 */
+	public LinkedList<Node> getPath(Node startNode, Node endNode){
+		LinkedList<Node> ll = new LinkedList<Node>();
+		HashMap<Node, LinkedList<Node>> hm = getDijkstraCollection(startNode);
+		
+		try {
+			if (processedNodesWithAlgorithm.get(startNode).get(endNode) != null) {
+				// Get the path if it exists for
+				ll = (LinkedList) processedNodesWithAlgorithm.get(startNode).get(endNode); 							
+			}
+		
+		} catch (NullPointerException ex) {			
+			processedNodesWithAlgorithm.put(startNode, getDijkstraCollection(startNode));
+			ll = (LinkedList) processedNodesWithAlgorithm.get(startNode).get(endNode); // and the the path
+							
+		}	
+		return ll;
+			
+	}
+	/**
 	 * This class creates a Hashmap, taking every Node in the Network as a key
 	 * and stores the LinkedList of reachable Nodes for this node under this
 	 * key.
@@ -71,7 +103,7 @@ public class Dijkstra implements IAlgorithm{
 	 *         every node in the network.
 	 */
 	
-	public HashMap<Node, LinkedList<Node>> getPath(Node nForPath) {
+	public HashMap<Node, LinkedList<Node>> getDijkstraCollection(Node nForPath) {
  
 		//Fetch the network
 		Network n = Network.getInstance();

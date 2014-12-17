@@ -9,7 +9,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 
-public class Main extends Application {
+public class Main extends Application { 
 	@Override
 	public void start(Stage stage) {
 		try {

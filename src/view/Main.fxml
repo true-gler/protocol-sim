@@ -14,7 +14,7 @@
       <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+      <BorderPane prefHeight="300.0" prefWidth="300.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
          <top>
             <MenuBar fx:id="mbMenuBar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <menus>

@@ -7,7 +7,7 @@ import model.Node;
 
 public interface IAlgorithm {
 
-	public HashMap<Node, LinkedList<Node>> getPath(Node startNode);
+	public LinkedList getPath(Node startNode, Node endNode);
 
 
 }

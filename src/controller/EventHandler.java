@@ -54,6 +54,8 @@ public class EventHandler {
 
 	public static EventHandler getInstance(Node initNode, Node endNode, Paket paket) {
 		if (instance == null) {
+			setStartNode(initNode);
+			startNode.setP(paket);
 			instance = new EventHandler(initNode, endNode, paket);
 		}
 		return instance;
@@ -64,7 +66,6 @@ public class EventHandler {
 		this.setStartNode(initNode);
 		this.setEndNode(endNode);
 		this.setPaket(paket);
-		startNode.setP(paket);
 		lh = LogHandler.getInstance();
 		algorithm = (IAlgorithm) Network.getAlgorithm();
 		protocol = (IProtocol) Network.getProtocol();
@@ -78,6 +79,7 @@ public class EventHandler {
 		/**
 		 * Let the node choose which the next node is
 		 */	
+	//	startNode.setP(this.paket);
 		TXEvent startEvent = getStartNode().startCommunication();
 		if(startEvent == null) //DoS foe 
 		{
@@ -147,6 +149,7 @@ public class EventHandler {
 	private void executeEvent(Event e) {
 		Node sNode = ((Event) e).getInitNode();
 		Node rNode = ((Event) e).getreceiverNode();
+	
 		
 		/**
 		 * Simulation Finished
@@ -154,7 +157,7 @@ public class EventHandler {
 		
 		if (e instanceof SimulationFinishedEvent) {
 			// Invokes the last receive
-			rNode.receive(sNode,rNode, rNode.getP());
+			rNode.receive(sNode,rNode, sNode.getP());
 			protocol.executeFinished(null);
 		}
 		/**
@@ -250,7 +253,7 @@ public class EventHandler {
 			 */
 			else {
 				
-				try {
+				try {					
 					RXEvent eLayer3 = rNode.transmitLayer3(sNode, rNode, sNode.getP());
 					eLayer3.setLayer7Flag(false);
 					this.addEvent(eLayer3);
@@ -264,8 +267,7 @@ public class EventHandler {
 		}
 		else { // Dieser Fall sollte nicht eintreten
 				System.out.println("!! unknown Event!?");
-		}
-
+		}		
 		if (debug) {
 			try {
 				this.printQueue();

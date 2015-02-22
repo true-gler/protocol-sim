@@ -43,7 +43,7 @@ public class FoeCrowdsDOS extends Node{
 		/**
 		 * This is where your paket should be transmitted, but it simply doesn't
 		 */
-		System.out.println("No paket transmitted. Sorry for the inconvenience!");
+		System.out.println("No paket transmitted. DoS Node aborted transmit");
 		
 		RXEvent rxe = new RXEvent(null, null);
 		return rxe;

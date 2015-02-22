@@ -141,6 +141,7 @@ public class SimulationController implements Initializable {
 					Node receiver = n.getAllNodes().get(receiverNr);
 					EventHandler.setEndNode(n.getAllNodes().get(receiverNr));
 					EventHandler.setStartNode(n.getAllNodes().get(initNodeNr));
+				
 					try {
 						System.out
 								.println("L7 | Want to send a Package form: "
@@ -151,7 +152,8 @@ public class SimulationController implements Initializable {
 								.getText());
 
 						for (int i = 0; i < threadCount; i++) {
-							Paket p = new Paket(1, tfPacket.getText());
+							Paket p = new Paket(i, tfPacket.getText());
+							EventHandler.setPaket(p);
 							sim = new Simulator(initNode, receiver, p);
 							sim.startSimulation();
 							simulationCount++;
@@ -219,6 +221,31 @@ public class SimulationController implements Initializable {
 	 */
 	public void setStage(Stage stage) {
 		this.primaryStage = stage;
+	}
+	
+	/**
+	 * Show Information of development
+	 */
+	@FXML
+	private void showAbout(){
+		try {
+			
+			System.out.println("show about");
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("About.fxml"));
+			GridPane root = (GridPane) loader.load();
+	    
+			Stage stage = new Stage();
+			Scene scene = new Scene(root);
+			
+
+			// CSS
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage.setScene(scene);
+			stage.show();		
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	

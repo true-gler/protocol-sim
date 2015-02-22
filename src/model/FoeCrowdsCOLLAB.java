@@ -41,7 +41,7 @@ public class FoeCrowdsCOLLAB extends Node{
 		Network network = Network.getInstance();
 		int n = (int) (getSecureRandomNumber() * network.getAllNodes().size());
 		Node receiver = network.getAllNodes().get(n);
-		
+		this.setP(EventHandler.getPaket());
 		TXEvent startEvent = new TXEvent(this, receiver);
 		startEvent.setLayer7Flag(true); //The initial Event is on Layer7, followed by L3 events
 		System.out.println("Start Communication from: " + this.getId() + " to: " + receiver.getId());

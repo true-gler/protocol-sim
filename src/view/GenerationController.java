@@ -22,6 +22,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
@@ -162,7 +163,32 @@ public class GenerationController {
 	private void closeWindow() {
 		this.primaryStage.close();
 	}
+	
+	/**
+	 * Show Information of development
+	 */
+	@FXML
+	private void showAbout(){
+		try {
+			
+			System.out.println("show about");
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("About.fxml"));
+			GridPane root = (GridPane) loader.load();
+	    
+			Stage stage = new Stage();
+			Scene scene = new Scene(root);
+			
 
+			// CSS
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage.setScene(scene);
+			stage.show();		
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private INode createObjectNode(String type){		
 		INode castToINode = null;
 		try {

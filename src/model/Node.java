@@ -57,8 +57,9 @@ public class Node implements INode {
 		Network network = Network.getInstance();
 		int n = (int) (getSecureRandomNumber() * network.getAllNodes().size());
 		Node receiver = network.getAllNodes().get(n);
-		
+		this.setP(EventHandler.getPaket());
 		TXEvent startEvent = new TXEvent(this, receiver);
+		
 		System.out.println("L7 | Start Communication from: " + this.getId() + " to: " + receiver.getId());
 		return startEvent;
 		

@@ -55,7 +55,7 @@ public class ShowNetworkController extends Application {
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 		root = new Group();
 		scene = new Scene(root, 800, 800, Color.WHITE);
-		Label label  = new Label("klick the dots to show the id");
+		Label label  = new Label("Click the dots to show the id!");
 		
 		double width = primaryScreenBounds.getWidth();
 		double height = primaryScreenBounds.getHeight();

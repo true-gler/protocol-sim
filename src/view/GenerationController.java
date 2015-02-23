@@ -74,7 +74,7 @@ public class GenerationController {
 						// TODO Auto-generated catch block
 						String valuestr = str[1];
 						Network.addParameter(name, valuestr);	
-						e.printStackTrace();
+						if(debug) e.printStackTrace();
 					}
 				}						
 			}

@@ -1,8 +1,8 @@
 package controller;
 
-import model.Network;
+import data.Network;
+import data.Paket;
 import model.Node;
-import model.Paket;
 
 /**
  * Many Simulators

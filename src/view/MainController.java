@@ -2,8 +2,8 @@ package view;
 
 import javax.swing.JFileChooser;
 
-import model.Network;
 import controller.InputParser;
+import data.Network;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;

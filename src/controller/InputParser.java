@@ -16,11 +16,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import data.Network;
+import data.ReachableList;
 import exceptions.AlgorithmNotFoundException;
 import exceptions.NodeTypeNotFoundException;
-import model.Network;
 import model.Node;
-import model.ReachableList;
 
 /**
  * @author thomas, simon

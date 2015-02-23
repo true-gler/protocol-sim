@@ -2,11 +2,11 @@ package interfaces;
 
 import java.util.ArrayList;
 
+import data.Paket;
 import event.Event;
 import event.RXEvent;
 import event.TXEvent;
 import model.Node;
-import model.Paket;
 
 /**
  * @author Thomas

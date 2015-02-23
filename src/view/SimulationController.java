@@ -14,13 +14,13 @@ import java.util.Vector;
 import javax.swing.JFileChooser;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import model.Network;
 import model.Node;
-import model.Paket;
 import controller.EventHandler;
 import controller.InputParser;
 import controller.LogHandler;
 import controller.Simulator;
+import data.Network;
+import data.Paket;
 import event.Event;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

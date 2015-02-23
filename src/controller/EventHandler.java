@@ -8,10 +8,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
+import data.Network;
+import data.Paket;
 import algorithm.Dijkstra;
-import model.Network;
 import model.Node;
-import model.Paket;
 import event.Event;
 import event.RXEvent;
 import event.SimulationFinishedEvent;

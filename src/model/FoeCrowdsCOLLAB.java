@@ -1,6 +1,8 @@
 package model;
 
 import controller.EventHandler;
+import data.Network;
+import data.Paket;
 import event.Event;
 import event.RXEvent;
 import event.SimulationFinishedEvent;

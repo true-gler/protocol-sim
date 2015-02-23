@@ -11,11 +11,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 
+import data.Network;
+import data.ReachableList;
 import javafx.stage.Stage;
 import exceptions.NodeTypeNotFoundException;
-import model.Network;
 import model.Node;
-import model.ReachableList;
 
 /**
  * This is the algorithm to generate the network, using the barabasi albert model.

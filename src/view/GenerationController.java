@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import controller.NetworkGenerator;
-import model.Network;
+import data.Network;
 import model.Node;
 import exceptions.NodeTypeNotFoundException;
 import javafx.fxml.FXML;

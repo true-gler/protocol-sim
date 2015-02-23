@@ -2,7 +2,6 @@ Protocol: Crowds
 Algorithm: Dijkstra
 Parameter:
 pf 0.8
-test felf
 -
 0 Node
 1 Node

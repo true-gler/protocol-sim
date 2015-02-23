@@ -1,6 +1,8 @@
-package model;
+package data;
 
 import java.util.LinkedList;
+
+import model.Node;
 
 
 /**

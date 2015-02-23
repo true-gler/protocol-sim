@@ -1,7 +1,7 @@
 package interfaces;
 
+import data.Paket;
 import model.Node;
-import model.Paket;
 import event.Event;
 
 public interface IProtocol {

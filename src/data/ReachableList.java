@@ -1,7 +1,9 @@
-package model;
+package data;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+
+import model.Node;
 
 
 public class ReachableList {

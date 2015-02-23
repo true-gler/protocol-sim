@@ -7,9 +7,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import model.Network;
+import data.Network;
+import data.ReachableNodes;
 import model.Node;
-import model.ReachableNodes;
 
 /**
  * @author Simon, Thomas

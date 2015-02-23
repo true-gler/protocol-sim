@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import controller.EventHandler;
 import controller.LogHandler;
-import model.Network;
+import data.Network;
 import interfaces.IProtocol;
 
 public class Crowds implements IProtocol{

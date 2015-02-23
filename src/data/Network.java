@@ -1,4 +1,4 @@
-package model;
+package data;
 
 import java.security.Timestamp;
 import java.util.ArrayList;
@@ -6,6 +6,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+
+import model.Node;
 
 public class Network{
 

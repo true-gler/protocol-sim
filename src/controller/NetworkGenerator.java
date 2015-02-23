@@ -243,7 +243,7 @@ public class NetworkGenerator {
 						
 						
 					} catch (Exception e) {
-						e.printStackTrace();
+						if(debug) e.printStackTrace();
 						return false;
 					}
 				

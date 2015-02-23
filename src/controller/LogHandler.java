@@ -98,7 +98,7 @@ public class LogHandler {
 			writer.append(str);
 		   } catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			   e.printStackTrace();
 		
 		}		
 	}

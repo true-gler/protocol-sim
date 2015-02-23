@@ -121,7 +121,7 @@ public class EventHandler {
 				}
 
 		} catch (Exception e1) {
-			e1.printStackTrace();
+			if(debug) e1.printStackTrace();
 			System.out.println("Something wrong with simulate");
 		} finally {
 			long end = System.currentTimeMillis();
@@ -245,7 +245,7 @@ public class EventHandler {
 
 				} catch (Exception e1) {
 				
-					e1.printStackTrace();
+					if(debug) e1.printStackTrace();
 				}
 			}
 			/**
@@ -259,7 +259,7 @@ public class EventHandler {
 					this.addEvent(eLayer3);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					if(debug)  e1.printStackTrace();
 				}
 			}
 			
@@ -272,7 +272,7 @@ public class EventHandler {
 			try {
 				this.printQueue();
 			} catch (Exception e2) {
-				e2.printStackTrace();
+				if(debug) e2.printStackTrace();
 			}
 		}
 	}

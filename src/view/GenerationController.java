@@ -11,7 +11,9 @@ import java.util.ResourceBundle;
 import controller.NetworkGenerator;
 import data.Network;
 import model.Node;
+import exceptions.AlgorithmNotFoundException;
 import exceptions.NodeTypeNotFoundException;
+import exceptions.ProtocolNotFoundException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,8 +31,10 @@ import javafx.stage.Stage;
 public class GenerationController {
 
 	private static HashMap<String, Integer> hm;
-	private static boolean debug = false;
+	private static boolean debug = true;
 	private Stage primaryStage;
+	private IAlgorithm ialgorithm;
+	private IProtocol iprotocol; 
 
 	@FXML
 	TextField tfAmount;
@@ -47,66 +51,62 @@ public class GenerationController {
 	@FXML
 	public void generateNetwork() {
 		try {
+			NetworkGenerator ng = new NetworkGenerator();
 			int amountOfNodes = Integer.parseInt(tfAmount.getText());
 			String[] key = taType.getText().split("\n");
 			String[] value = taCount.getText().split("\n");
 			String[] parameter = taParameter.getText().split("\n"); 
 			
-			// Get the Parameter
+			// Get the Parameter and set Algorithm and Protocol
 			String protocol = parameter[0].split(":")[1].trim();
 			String algorithm = parameter[1].split(":")[1].trim();
-			IAlgorithm ialgorithm = createObjectAlgorithm(algorithm);
-			IProtocol iprotocol = createObjectProtocol(protocol);
-			Network.setAlgorithm(ialgorithm);
-			Network.setProtocol(iprotocol);
 			
-			String[] str = null;
-			String name = "";
+			ialgorithm = ng.createClassAlgorithm(algorithm);
+			iprotocol = ng.createClassProtocol(protocol);
 			
-			for(int i = 3; i < parameter.length; i++){
-				str = parameter[i].split(" ");
-				name = str[0];
-				if(!name.isEmpty()){
-					try {
-						float valuef = Float.parseFloat(str[1]);
-						Network.addParameter(name, valuef);	
-					} catch (Exception e) {							
-						// TODO Auto-generated catch block
-						String valuestr = str[1];
-						Network.addParameter(name, valuestr);	
-						if(debug) e.printStackTrace();
-					}
-				}						
+			if (iprotocol == null){							
+				throw new ProtocolNotFoundException();
+			} else {
+				Network.setProtocol(iprotocol);						
 			}
+			
+			if (ialgorithm == null){							
+				throw new AlgorithmNotFoundException();
+			} else {
+				Network.setAlgorithm(ialgorithm);						
+			}		
+			
+			readAndAddParameter(parameter);
 			 
 			
-			
-			// get foe text area
-			int totalFoes = 0;
-			for(int i = 0; i < key.length; i++){
-				totalFoes += Integer.parseInt(value[i]);
-			}
-			if(key.length == value.length  && amountOfNodes > totalFoes) {// keine eingabe von gleichen werten
 			hm = new HashMap<String, Integer>();
 			
+			/**
+			 * Generating and adding the Nodes of the TextArea to the network 
+			 */
+			int totalOtherNodeTypes = 0;
+			for(int i = 0; i < key.length; i++){
+				totalOtherNodeTypes += Integer.parseInt(value[i]);
+			}
+			if(key.length == value.length  && amountOfNodes > totalOtherNodeTypes) {// keine eingabe von gleichen werten
+			
+			
 			for (int i = 0; i < value.length; i++) {
-				if (createObjectNode("model."  +  key[i]) == null) {
+				if (ng.createObjectNode("model."  +  key[i]) == null) {
 					throw new NodeTypeNotFoundException();
 				} else {
 					hm.put("model."  +  key[i], Integer.parseInt(value[i]));
 				}
-			}
+			}			
+			Network.setTypesOfNodes(hm);			
 			
-			Network.setTypesOfNodes(hm);
-			
-			NetworkGenerator ng = new NetworkGenerator();
 			
 			if (!ng.generateNetwork(hm, amountOfNodes)) {
 				tfMessage.setText("network generation failed");
 			} else {
 				tfMessage.setText("network generated");
 			}
-			goToSimulationGUI();
+				goToSimulationGUI();
 			}
 			else {
 				throw new NumberFormatException();
@@ -116,6 +116,31 @@ public class GenerationController {
 			tfMessage.setText("check your inputs");
 		} catch (NodeTypeNotFoundException e) {
 			tfMessage.setText("node type not found");
+		} catch (ProtocolNotFoundException e){
+			tfMessage.setText("protocol not found");
+		} catch (AlgorithmNotFoundException e){
+			tfMessage.setText("algorithm not found");
+		}
+	}
+
+	private void readAndAddParameter(String[] parameter) {
+		String[] str = null;
+		String name = "";
+		
+		for(int i = 3; i < parameter.length; i++){
+			str = parameter[i].split(" ");
+			name = str[0];
+			if(!name.isEmpty()){
+				try {
+					float valuef = Float.parseFloat(str[1]);
+					Network.addParameter(name, valuef);	
+				} catch (Exception e) {							
+					// TODO Auto-generated catch block
+					String valuestr = str[1];
+					Network.addParameter(name, valuestr);	
+					if(debug) e.printStackTrace();
+				}
+			}						
 		}
 	}
 	
@@ -189,51 +214,5 @@ public class GenerationController {
 		}
 	}
 	
-	private INode createObjectNode(String type){		
-		INode castToINode = null;
-		try {
-			Class classDefinition = Class.forName(type);			
-			castToINode = (INode) classDefinition.newInstance();			
-		} catch (InstantiationException e) {
-			if(debug) System.out.println(e);
-		} catch (IllegalAccessException e) {
-			if(debug) System.out.println(e);
-		} catch (ClassNotFoundException e) {
-			if(debug) System.out.println(e);
-		}
-		return castToINode;
-	}
 	
-	private IProtocol createObjectProtocol(String type){		
-		IProtocol castToIProtocol = null;
-		try {
-			Class classDefinition = Class.forName("protocol." + type);			
-			castToIProtocol = (IProtocol) classDefinition.newInstance();
-		
-		} catch (InstantiationException e) {
-			if(debug) System.out.println(e);
-		} catch (IllegalAccessException e) {
-			if(debug) System.out.println(e);
-		} catch (ClassNotFoundException e) {		
-			if(debug) System.out.println(e);
-		}
-		return castToIProtocol;
-	}
-	
-	private IAlgorithm createObjectAlgorithm(String type){
-		
-		IAlgorithm castToIAlgorithm = null;
-		try {
-			Class classDefinition = Class.forName("algorithm." + type);			
-			castToIAlgorithm = (IAlgorithm) classDefinition.newInstance();
-		
-		} catch (InstantiationException e) {
-			if(debug) System.out.println(e);
-		} catch (IllegalAccessException e) {
-			if(debug) System.out.println(e);
-		} catch (ClassNotFoundException e) {
-			if(debug) System.out.println(e);
-		}
-		return castToIAlgorithm;
-	}
 }

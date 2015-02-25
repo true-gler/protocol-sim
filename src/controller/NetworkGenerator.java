@@ -26,7 +26,7 @@ import model.Node;
 
 public class NetworkGenerator {
 
-	private static boolean debug = false;
+	private static boolean debug = true;
 	//private Stage primaryStage;
 	// Array List which contains all nodes
 	private static ArrayList<Node> allNodes = null;
@@ -123,7 +123,7 @@ public class NetworkGenerator {
 		}
 
 		Network.setAllNodes(allNodes);
-		Network.setNodesToReach(nodesToReach);
+		Network.setNodesToReach(nodesToReach);	
 		return true;
 	}
 
@@ -276,9 +276,20 @@ public class NetworkGenerator {
 		SecureRandom random = new SecureRandom();
 		return random.nextFloat();
 	}
+	
+	public IAlgorithm createClassAlgorithm(String algorithm){
+		IAlgorithm ialgorithm = createObjectAlgorithm(algorithm);
+		return ialgorithm;
+	}
+	
+	public IProtocol createClassProtocol(String protocol){
+		IProtocol iprotocol = createObjectProtocol(protocol);
+		return iprotocol;
+	}
+	
+	
 
-
-	private INode createObjectNode(String type){		
+	public INode createObjectNode(String type){		
 		INode castToINode = null;
 		try {
 			Class classDefinition = Class.forName(type);			
@@ -291,5 +302,38 @@ public class NetworkGenerator {
 			if(debug) System.out.println(e);
 		}
 		return castToINode;
-	}	
+	}
+	
+	public IProtocol createObjectProtocol(String type){		
+		IProtocol castToIProtocol = null;
+		try {
+			Class classDefinition = Class.forName("protocol." + type);			
+			castToIProtocol = (IProtocol) classDefinition.newInstance();
+		
+		} catch (InstantiationException e) {
+			if(debug) System.out.println(e);
+		} catch (IllegalAccessException e) {
+			if(debug) System.out.println(e);
+		} catch (ClassNotFoundException e) {		
+			if(debug) System.out.println(e);
+		}
+		return castToIProtocol;
+	}
+	
+	public IAlgorithm createObjectAlgorithm(String type){
+		
+		IAlgorithm castToIAlgorithm = null;
+		try { 
+			Class classDefinition = Class.forName("algorithm." + type);			
+			castToIAlgorithm = (IAlgorithm) classDefinition.newInstance();
+		
+		} catch (InstantiationException e) {
+			if(debug) System.out.println(e);
+		} catch (IllegalAccessException e) {
+			if(debug) System.out.println(e);
+		} catch (ClassNotFoundException e) {
+			if(debug) System.out.println(e);
+		}
+		return castToIAlgorithm;
+	}
 }

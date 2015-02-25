@@ -20,6 +20,7 @@ import data.Network;
 import data.ReachableList;
 import exceptions.AlgorithmNotFoundException;
 import exceptions.NodeTypeNotFoundException;
+import exceptions.ProtocolNotFoundException;
 import model.Node;
 
 /**
@@ -98,7 +99,7 @@ public class InputParser {
 					if(line.startsWith("Algorithm")){
 						buffer = line.split(":");
 						String classType = buffer[1].trim();
-						Object algorithm = createObjectAlgorithm(classType);						
+						IAlgorithm algorithm = createObjectAlgorithm(classType);						
 						if (algorithm == null){							
 							throw new AlgorithmNotFoundException();
 						} else {
@@ -107,9 +108,9 @@ public class InputParser {
 					} else if(line.startsWith("Protocol")){
 						buffer = line.split(":");
 						String classType = buffer[1].trim();
-						Object protocol = createObjectProtocol(classType);						
+						IProtocol protocol = createObjectProtocol(classType);						
 						if (protocol == null){							
-							throw new AlgorithmNotFoundException();
+							throw new ProtocolNotFoundException();
 						} else {
 							Network.setProtocol(protocol);						
 						}

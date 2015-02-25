@@ -99,20 +99,20 @@ public class InputParser {
 					if(line.startsWith("Algorithm")){
 						buffer = line.split(":");
 						String classType = buffer[1].trim();
-						IAlgorithm algorithm = createObjectAlgorithm(classType);						
-						if (algorithm == null){							
+						IAlgorithm ialgorithm = createObjectAlgorithm(classType);						
+						if (ialgorithm == null){							
 							throw new AlgorithmNotFoundException();
 						} else {
-							Network.setAlgorithm(algorithm);						
+							Network.setAlgorithm(ialgorithm);						
 						}
 					} else if(line.startsWith("Protocol")){
 						buffer = line.split(":");
 						String classType = buffer[1].trim();
-						IProtocol protocol = createObjectProtocol(classType);						
-						if (protocol == null){							
+						IProtocol iprotocol = createObjectProtocol(classType);						
+						if (iprotocol == null){							
 							throw new ProtocolNotFoundException();
 						} else {
-							Network.setProtocol(protocol);						
+							Network.setProtocol(iprotocol);						
 						}
 					}
 					else if(line.startsWith("Parameter")){

@@ -24,7 +24,7 @@ import exceptions.ProtocolNotFoundException;
 import model.Node;
 
 /**
- * @author thomas, simon
+ * 
  *  Input Parser - reads in the file that contains the Nodes 
  *  
  *  example File:
@@ -40,6 +40,8 @@ import model.Node;
  *	0 1 10
  *  0 2 20
  *  1 2 30
+ *  
+ *  @author Thomas, simon
  *  
  */
 public class InputParser {

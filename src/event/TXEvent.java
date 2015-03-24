@@ -3,6 +3,7 @@ package event;
 import model.Node;
 
 /**
+ * TxEvent for transmitting
  * @author Thomas
  *
  */

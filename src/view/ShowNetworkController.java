@@ -40,6 +40,11 @@ class Edge {
 
 }
 
+/**
+ * Prints the network, uses the JUNG Library
+ * @author Thomas
+ *
+ */
 public class ShowNetworkController extends Application {
 	private Stage primaryStage;
 	private static final int CIRCLE_SIZE = 4; // default circle size

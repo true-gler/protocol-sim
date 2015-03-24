@@ -6,6 +6,7 @@ package event;
 import model.Node;
 
 /**
+ * The simulationfinished event is used for the notification to the eventhandler to finish the simulation
  * @author Thomas
  *
  */

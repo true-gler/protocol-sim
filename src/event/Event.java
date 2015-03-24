@@ -6,7 +6,13 @@ package event;
 import data.Paket;
 import model.Node;
 
-
+/**
+ * The ecent class represents the main event that is used to send packages 
+ * in the network
+ * RxEvent and TxEvent extend the Event class
+ * @author Thomas
+ *
+ */
 
 public class Event implements Comparable<Event>{
 

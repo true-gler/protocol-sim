@@ -12,13 +12,15 @@ import data.ReachableNodes;
 import model.Node;
 
 /**
- * @author Simon, Thomas
+ * 
  * 
  * The algorithm will need some improvements:
  *	- 	According to Wikipedia we should use a fibonacci-heap to get the complexity from
  *		O(n^2) to O(n*log(n) + m) 
  *		where n is the number of nodes and 
  *		m is the number of edges (or in our case number of connections)
+ *
+ * @author Simon, Thomas
  */		
 
 

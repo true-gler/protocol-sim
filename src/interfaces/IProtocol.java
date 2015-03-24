@@ -4,6 +4,11 @@ import data.Paket;
 import model.Node;
 import event.Event;
 
+/**
+ * Interface for protocols
+ * @author Thomas
+ *
+ */
 public interface IProtocol {
 		
 	public void executeTX(Object... object);

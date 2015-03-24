@@ -45,6 +45,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
+/**
+ * Simulation gui
+ * @author Thomas
+ *
+ */
 public class SimulationController implements Initializable {
 
 	@FXML

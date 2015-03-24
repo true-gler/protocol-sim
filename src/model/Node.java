@@ -18,8 +18,10 @@ import event.SimulationFinishedEvent;
 import event.TXEvent;
 
 /**
+ * "base node" for the crowds communication
+ *  classes FoeCrowdsCollab, FoeCrowdsCP, FoeCrowdsDOS extend this class  
  * @author Thomas
- * Node For the crowds Communication
+ * 
  */
 public class Node implements INode {
 

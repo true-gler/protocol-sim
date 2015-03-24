@@ -16,7 +16,7 @@ import event.TXEvent;
  * changes the content of the packet and then sends this packet to the next node. 
  * This could be used to insert malicious data or just to corrupt a communication.
  * 
- * @author stischle
+ * @author simon, thomas
  */
 
 public class FoeCrowdsCOLLAB extends Node{

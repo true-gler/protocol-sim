@@ -24,6 +24,12 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Duration;
 
+/**
+ * Shows the options between reading the network input from a file and enter the inputs in textfields
+ *
+ * @author Thomas
+ *
+ */
 public class MainController {
 
 	@FXML

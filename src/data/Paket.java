@@ -2,6 +2,11 @@ package data;
 
 import java.io.Serializable;
 
+/**
+ * This class represents a paket that is send by nodes in the network
+ * @author Thomas
+ *
+ */
 public class Paket implements Serializable {
 	
 	private int id;

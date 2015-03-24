@@ -9,6 +9,11 @@ import event.TXEvent;
 import model.Node;
 
 /**
+ * Interface for nodes
+ * 
+ * receive -> Layer7  --- "direct sending"
+ * receiveLayer3 -> Layer3  --- "physical path"
+ * 
  * @author Thomas
  *
  */

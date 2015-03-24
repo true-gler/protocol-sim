@@ -4,6 +4,7 @@ import model.Node;
 
 
 /**
+ * RxEvent for receiving
  * @author Thomas
  *
  */

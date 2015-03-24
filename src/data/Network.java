@@ -9,12 +9,15 @@ import java.util.LinkedList;
 
 import model.Node;
 
+
+/** 
+ * Class for connections. Stores the Name of a node and a LinkedList with all connected nodes and the latencies
+ * @author Thomas
+ */
+
 public class Network{
 
-	/** 
-	 * Class for connections. Stores the Name of a node and a LinkedList with all connected nodes and the latencies
-	 * 
-	 */
+	
 	
 	/**
 	 * ArrayList for ReachableLists which contains the target Nodes

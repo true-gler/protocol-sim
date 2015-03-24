@@ -5,8 +5,8 @@ import data.Paket;
 import model.Node;
 
 /**
- * Many Simulators
- * Simulator which invokes a Communication ten
+ * Main Simulator
+ * Performs multiple Simulations
  * 
  * @author Thomas
  * 

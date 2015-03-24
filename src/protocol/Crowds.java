@@ -7,6 +7,12 @@ import controller.LogHandler;
 import data.Network;
 import interfaces.IProtocol;
 
+/**
+ * Implementation of a protocol
+ * 
+ * @author Thomas
+ *
+ */
 public class Crowds implements IProtocol{
 	
 	private LogHandler lh = LogHandler.getInstance();
@@ -41,6 +47,9 @@ public class Crowds implements IProtocol{
 		
 	}
 
+	/**
+	 * Checks the theorem of crowds see documentation paper
+	 */
 	@Override
 	public void executePostSimulation(Object... object) {
 

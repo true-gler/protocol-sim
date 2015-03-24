@@ -28,6 +28,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
+/**
+ * The GenerationController handles the communication between the view and the controller
+ * and builds the network out of the inputs of the view
+ * 
+ * @author Thomas
+ *
+ */
 public class GenerationController {
 
 	private static HashMap<String, Integer> hm;
@@ -48,6 +55,9 @@ public class GenerationController {
 	TextArea taParameter;
 
 
+	/**
+	 * Generates a new network by reading the information out of the View (TextAreas)
+	 */
 	@FXML
 	public void generateNetwork() {
 		try {

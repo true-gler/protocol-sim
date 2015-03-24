@@ -18,7 +18,9 @@ import event.SimulationFinishedEvent;
 import event.TXEvent;
 
 /**
- * Main Class of Communications between Nodes in a Network
+ * Main Class of Communications between nodes in a network
+ * The EventHandler simulates the communication due to the use of events
+ * Events are stored in a PriorityQueue and performed sequentially FIFO
  * 
  * @author Thomas
  * 
@@ -80,6 +82,8 @@ public class EventHandler {
 		 * Let the node choose which the next node is
 		 */	
 	//	startNode.setP(this.paket);
+
+		
 		TXEvent startEvent = getStartNode().startCommunication();
 		if(startEvent == null) //DoS foe 
 		{
@@ -89,7 +93,17 @@ public class EventHandler {
 		}
 		startEvent.setLayer7Flag(true); //The initial Event is on Layer7, followed by L3 events
 		this.addEvent(startEvent);
-
+		
+		/**
+		 * Eintrag für das Initiale Senden (nicht start Event)
+		 */
+		TXEvent initEvent = new TXEvent(startEvent.getInitNode(), this.getEndNode());
+		initEvent.setLayer7Flag(true);
+		String output1 = lh.formattingLogOutput(initEvent);
+		lh.appendData(output1);
+		/**
+		 * Ende
+		 */
 		Event e = null;
 		long begin = System.currentTimeMillis();
 		try {

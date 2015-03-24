@@ -1,5 +1,13 @@
 package exceptions;
 
+
+
+/**
+ * Used to check if the specified protocol-name is found in the package protocol
+ * Used in combination with Reflections
+ * @author Thomas
+ *
+ */
 public class ProtocolNotFoundException extends Exception{
 	
 

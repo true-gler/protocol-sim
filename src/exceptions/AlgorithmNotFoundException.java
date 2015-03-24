@@ -1,5 +1,11 @@
 package exceptions;
 
+/**
+ * Used to check if the specified algorithmname is found in the package algorithm
+ * Used in combination with Reflections
+ * @author Thomas
+ *
+ */
 public class AlgorithmNotFoundException extends Exception{
 	
 

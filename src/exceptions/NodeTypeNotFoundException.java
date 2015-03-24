@@ -3,7 +3,10 @@
  */
 package exceptions;
 
+
 /**
+ * Used to check if the specified NodeType-name is found in the package model
+ * Used in combination with Reflections
  * @author Thomas
  *
  */

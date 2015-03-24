@@ -10,6 +10,11 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 
+/**
+ * Shows the initial view 
+ * @author Thomas
+ *
+ */
 public class Main extends Application { 
 	@Override
 	public void start(Stage stage) {

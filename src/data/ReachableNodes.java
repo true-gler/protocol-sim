@@ -6,7 +6,7 @@ import model.Node;
 
 
 /**
- * LinkedList Object for target nodes
+ * LinkedList for target nodes
  * @author Thomas
  *
  */

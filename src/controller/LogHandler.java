@@ -7,11 +7,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import model.Node;
 import javafx.collections.FXCollections;
 import event.Event;
 
 /**
  * This class handles the LogHandling for writing CSV Data
+ * Also holds a logcounter for ongoing enumeration
  * 
  * @author Thomas
  * 
@@ -23,7 +25,8 @@ public class LogHandler {
 	private static int logcounter = 0;
 	private static FileWriter writer;
 	private static LogHandler instance = null;
-	
+	private static Node n = null;
+	private static Node firstNode = null;
 	public static LogHandler getInstance(){
 		if(instance == null){
 			instance = new LogHandler();
@@ -75,11 +78,30 @@ public class LogHandler {
 		String action = e.getClass().toString();
 		String layer;
 		
-		if (e.isLayer7Flag()) layer = "L7";
+		if (e.isLayer7Flag()) {
+			layer = "L7";			
+		}
 		else layer = "L3";
 		
-		if (action.contains("RX")) action = "RX";
-		else action = "TX";
+		if (action.contains("RX")){
+			action = "RX";
+			if(e.isLayer7Flag()){
+				e.setInitNode(n);
+			}
+		}
+		else if(action.contains("SimulationFinished")) {
+			action = "SF";
+			e.setInitNode(firstNode);
+		}
+		else {
+			action = "TX";
+			if(e.isLayer7Flag()){
+				n = e.getInitNode();
+				if(firstNode == null){
+					firstNode = n;
+				}
+			}
+		}
 		
 		String str;
 		try {

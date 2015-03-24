@@ -5,6 +5,12 @@ import java.util.LinkedList;
 
 import model.Node;
 
+/**
+ * The reachable list represents all nodes that a reached by another node
+ * Each entry in a ReachableList contains a LinkedList  
+ * @author Thomas
+ *
+ */
 
 public class ReachableList {
 	

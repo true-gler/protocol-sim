@@ -22,6 +22,8 @@ import model.Node;
  * According to research this algorithm models the structure of todays internet very well
  * because nodes with a large number of connections get even more connections and those
  * with fewer connections are not as likely to get new connections
+ * 
+ * @author Thomas
  */
 
 public class NetworkGenerator {

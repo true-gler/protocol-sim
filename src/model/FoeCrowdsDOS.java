@@ -14,7 +14,7 @@ import event.TXEvent;
  * This is basically a "denyal of service"(DOS) Foe, which upon receiving a packet, won't 
  * forward it and therefore stop the communication
  *
- * @author stischle
+ * @author simon, thomas
  */
 
 public class FoeCrowdsDOS extends Node{

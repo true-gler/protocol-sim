@@ -20,7 +20,7 @@ import model.Node;
  *		where n is the number of nodes and 
  *		m is the number of edges (or in our case number of connections)
  *
- * @author Simon, Thomas
+ * @author Simon
  */		
 
 

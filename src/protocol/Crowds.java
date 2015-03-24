@@ -10,7 +10,7 @@ import interfaces.IProtocol;
 /**
  * Implementation of a protocol
  * 
- * @author Thomas
+ * @author Thomas, simon
  *
  */
 public class Crowds implements IProtocol{

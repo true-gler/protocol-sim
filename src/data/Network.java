@@ -102,7 +102,7 @@ public class Network{
 		Network.nodesToReach = nodesToReach;
 	}
 
-	public ArrayList<Node> getAllNodes() {
+	public static ArrayList<Node> getAllNodes() {
 		return allNodes;
 	}
 

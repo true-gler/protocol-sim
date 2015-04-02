@@ -101,7 +101,7 @@ public class Node implements INode {
 		
 			System.out.println("L7 | --- Get random node for next transmit --- ");
 			
-			int n = (int) (getSecureRandomNumber() * Network.getInstance().getAllNodes().size());
+			int n = (int) (getSecureRandomNumber() * Network.getAllNodes().size());
 			Node receiver = Network.getInstance().getAllNodes().get(n);
 			TXEvent txe = new TXEvent(rNode, receiver);
 			txe.setLayer7Flag(true);

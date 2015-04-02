@@ -34,9 +34,6 @@ public class FoeCrowdsCP extends Node{
 
 	}
 	
-	/**
-	 * This is probably useless since a foe wouldn't really send something through the network
-	 */
 	public TXEvent startCommunication(){
 		/**
 		 * Get a random node from all existing, to start the communication with
@@ -104,8 +101,7 @@ public class FoeCrowdsCP extends Node{
 		
 		/**
 		 * Change the content of the package and then send it to the next node
-		 * 
-		 * Why is this not working?
+		 *
 		 */
 		p.setPayload("changed!");
 	

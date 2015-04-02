@@ -28,12 +28,6 @@ public class Network{
 	private static ArrayList<Node> allNodes;
 	
 	/**
-	 * Arraylist for the collaborating foes in the network. Every collaborating foe on
-	 * the way of the packet adds the Node he received it from
-	 */
-	
-	public static ArrayList<Node> collabAL = new ArrayList<>();
-	/**
 	 * Types of the nodes which are read in by the inputparser 
 	 */
 	private static HashMap <String, Integer> typesOfNodes;
@@ -70,11 +64,7 @@ public class Network{
 		parameter.put(parameterName, value);
 	}
 	
-	
-	//We don't add a timestamp, since the transmission is successive
-	public static void addCollabInformation(Node n){
-		collabAL.add(n);
-	}
+
 		
 	public static Network getInstance() {
 	      if (instance == null) {

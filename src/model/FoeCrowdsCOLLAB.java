@@ -1,5 +1,6 @@
 package model;
 
+import protocol.Crowds;
 import controller.EventHandler;
 import data.Network;
 import data.Paket;
@@ -38,7 +39,7 @@ public class FoeCrowdsCOLLAB extends Node{
 		/**
 		 * Add Information about the previous Node to the collabAL 
 		 */
-		Network.addCollabInformation(sNode);
+		Crowds.addCollabInformation(sNode);
 		
 		//if(sNode.equals(receiver)){ //receive the last Package
 		if(receiver == null){

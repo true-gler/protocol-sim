@@ -1,7 +1,9 @@
 package protocol;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import model.Node;
 import controller.EventHandler;
 import controller.LogHandler;
 import data.Network;
@@ -16,7 +18,18 @@ import interfaces.IProtocol;
 public class Crowds implements IProtocol{
 	
 	private LogHandler lh = LogHandler.getInstance();
+
+	/**
+	 * Arraylist for the collaborating foes in the network. Every collaborating foe on
+	 * the way of the packet adds the Node he received it from
+	 */
 	
+	public static ArrayList<Node> collabAL = new ArrayList<>();
+	//We don't add a timestamp, since the transmission is successive
+	
+	public static void addCollabInformation(Node n){
+		collabAL.add(n);
+	}
 
 	@Override
 	public void executePreSimulation(Object... object) {
@@ -54,12 +67,12 @@ public class Crowds implements IProtocol{
 	public void executePostSimulation(Object... object) {
 
 		lh = LogHandler.getInstance();
-		if(Network.collabAL.size() > 0){
+		if(collabAL.size() > 0){
 			lh.appendData("\nThe following Nodes have been unmasked by the collaborating Nodes\n");
-			for (int i = 0; i < Network.collabAL.size(); i++){
-				lh.appendData(Network.collabAL.get(i).toString() + "\n");					
+			for (int i = 0; i < collabAL.size(); i++){
+				lh.appendData(collabAL.get(i).toString() + "\n");					
 			}
-			if(Network.collabAL.get(0) == EventHandler.getStartNode()){
+			if(collabAL.get(0) == EventHandler.getStartNode()){
 				lh.appendData("\n!PROOF Unvieled the initiator of the Communication \n");
 				System.out.println("\n!PROOF Unvieled the initiator of the Communication \n");
 				int collabAmount = Network.getInstance().getTypeOfNode("model.FoeCrowdsCOLLAB");

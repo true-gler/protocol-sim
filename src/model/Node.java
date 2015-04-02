@@ -63,7 +63,7 @@ public class Node implements INode {
 		Node receiver = network.getAllNodes().get(n);
 		this.setP(EventHandler.getPaket());
 		TXEvent startEvent = new TXEvent(this, receiver);
-		
+		startEvent.setLayer7Flag(true); //The initial Event is on Layer7, followed by L3 events
 		System.out.println("L7 | Start Communication from: " + this.getId() + " to: " + receiver.getId());
 		return startEvent;
 		
@@ -74,8 +74,7 @@ public class Node implements INode {
 	public Event receive(Node sNode, Node rNode, Paket p) {
 
 		/** PacketList FIFO */
-		System.out.println("L7 | Receive: \tNode: " + this.getId() + " received Packet: " + p.getId() + "  with payload: '" + p.getPayload() + "'");
-//		this.setP(p);		
+		System.out.println("L7 | Receive: \tNode: " + this.getId() + " received Packet: " + p.getId() + "  with payload: '" + p.getPayload() + "'");	
 		
 		/**
 		 * Crowds Probability node logic 

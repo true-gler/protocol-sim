@@ -102,9 +102,7 @@ public class FoeCrowdsCP extends Node{
 		/**
 		 * Change the content of the package and then send it to the next node
 		 *
-		 */
-		p.setPayload("changed!");
-	
+		 */	
 		System.out.println("L3 | sending from : \tnode: " + initNode.getId() + " to " + nextNode.getId() +  " payload: " + p.getPayload());
 		p.setPayload("changed");
 		nextNode.setP(p);

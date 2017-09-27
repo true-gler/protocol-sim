@@ -14,7 +14,7 @@ As an example-protocol, CROWDS, is implemented with Dijkstra algorithm to find t
 Verification of the Theorem 5.2 for anonymity from the work of Rubin et al on Crowds: "Anonymity for Web Transactions".
 (http://avirubin.com/crowds.pdf)
 
-![theorem](https://raw.githubusercontent.com/true-gler/protocol-sim/master/docu/theorem 5.2.png)
+![theorem](https://raw.githubusercontent.com/true-gler/protocol-sim/master/docu/theorem_5.2.png)
 
 
 The initiator of the message has proven probable innocence against the collaborative

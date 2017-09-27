@@ -14,8 +14,9 @@ As an example-protocol, CROWDS, is implemented with Dijkstra algorithm to find t
 The starting node of any communication in the crowd has credible innocence, if:
 bild 
 
-To achieve proovable innocence, the following must apply:
-bild 
+To achieve probable innocence, the following must apply:
+![premise](https://raw.githubusercontent.com/true-gler/protocol-sim/master/docu/1.gif)
+
 
 Furthermore, n denotes the number of all participants in the crowd and c the number of the collabora-
 attacker at the time a transfer is started by the crowd

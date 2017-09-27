@@ -44,4 +44,4 @@ We showed that when violating the condition the sender can be detected with a pr
 
 A detailed documentation can be found in: 
 
-![Thesis](docu/Thesis.pdf) (German version)
+See [Thesis](docu/Thesis.pdf) (German version)

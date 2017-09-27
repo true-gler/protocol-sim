@@ -1,4 +1,4 @@
-# protocol-sim
+# Simulator for Anonymization Protocols
 
 ## Implementation
 This software can be used to simulate anonymity network protocols.

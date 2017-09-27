@@ -44,5 +44,4 @@ We showed that when violating the condition the sender can be detected with a pr
 
 A detailed documentation can be found in: 
 
-![Thesis](https://raw.githubusercontent.com/true-gler/protocol-sim/master/docu/Thesis.pdf)
-(German version)
+[Thesis](docu/Thesis.pdf) (German version)

@@ -9,7 +9,7 @@ As an example-protocol, CROWDS, is implemented with Dijkstra algorithm to find t
 (The simulator was designed with respect to extend it easily by further protocols)
 
 
-### Outcome
+### Analysis
 
 Verification of the Theorem 5.2 for anonymity from the work of Rubin et al on Crowds: "Anonymity for Web Transactions".
 (http://avirubin.com/crowds.pdf)
@@ -37,8 +37,8 @@ Within these Simulations, it was not possible for the attacker the sender with a
 
 At 58 nodes, on the other hand, half of the 200 simulations the sender was detected. 
 
-**Result:
-We showed that when violating the condition the sender can be detected with a probability of 1/2. (Theorem 5.2. of Rubin et el)**
+### Outcome:
+** We showed that when violating the condition the sender can be detected with a probability of 1/2. (Theorem 5.2. of Rubin et el) **
 
 
 ## Documentation 

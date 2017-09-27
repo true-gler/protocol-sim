@@ -12,10 +12,12 @@ As an example-protocol, CROWDS, is implemented with Dijkstra algorithm to find t
 
 ### Probable innocence
 The starting node of any communication in the crowd has credible innocence, if:
-bild 
+
+![premise](https://raw.githubusercontent.com/true-gler/protocol-sim/master/docu/1.gif)
 
 To achieve probable innocence, the following must apply:
-![premise](https://raw.githubusercontent.com/true-gler/protocol-sim/master/docu/1.gif)
+
+![premise](https://raw.githubusercontent.com/true-gler/protocol-sim/master/docu/2.gif)
 
 
 Furthermore, n denotes the number of all participants in the crowd and c the number of the collabora-
@@ -26,7 +28,7 @@ the core theorem of the work on the Crowds protocol is found, which has also bee
 Verification of the Theorem 5.2 for anonymity from the work of Rubin et al on Crowds: "Anonymity for Web Transactions".
 (http://avirubin.com/crowds.pdf)
 
-bild 
+![theorem](https://raw.githubusercontent.com/true-gler/protocol-sim/master/docu/theorem 5.2.png)
 
 
 The initiator of the message has proven probable innocence against the collaborative
@@ -54,4 +56,7 @@ We showed that when violating the condition the sender can be detected with a pr
 
 ## Documentation 
 
-A detailed documentation can be found in: (German version)
+A detailed documentation can be found in: 
+
+![Thesis](https://raw.githubusercontent.com/true-gler/protocol-sim/master/docu/Thesis.pdf)
+(German version)

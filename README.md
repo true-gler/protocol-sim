@@ -39,7 +39,7 @@ At 58 nodes, on the other hand, half of the 200 simulations the sender was detec
 
 ### Outcome
 
- We showed the correctness that **when violating the condition the sender can be detected with a probability of 1/2. **(Theorem 5.2. of Rubin et el) 
+ We showed the correctness that __when violating the condition the sender can be detected with a probability of 1/2. __ (Theorem 5.2. of Rubin et el) 
 
 
 ## Documentation 

@@ -36,8 +36,9 @@ A safe variant was chosen with 50 nodes. The correct sender was not detected a s
 Within these Simulations, it was not possible for the attacker the sender with a probability greater than 1/2.
 
 At 58 nodes, on the other hand, half of the 200 simulations the sender was detected. 
-As a result:
-We showed that when violating the condition the sender can be detected with a probability of 1/2. (Theorem 5.2. of Rubin et el)
+
+**Result:
+We showed that when violating the condition the sender can be detected with a probability of 1/2. (Theorem 5.2. of Rubin et el)**
 
 
 ## Documentation 

@@ -5,25 +5,11 @@ This software can be used to simulate anonymity network protocols.
 The goal was to provide a tool to empirically analyze anonymization protocols.
 One can run simulations on the pre defined network and perform attack sczenarios on the protocols in order to find possible (unknown) security issues.
 
-## Analyzation of CROWDS
 As an example-protocol, CROWDS, is implemented with Dijkstra algorithm to find the path through the network.
 (The simulator was designed with respect to extend it easily by further protocols)
 
 
-### Probable innocence
-The starting node of any communication in the crowd has credible innocence, if:
-
-![premise](https://raw.githubusercontent.com/true-gler/protocol-sim/master/docu/1.gif)
-
-To achieve probable innocence, the following must apply:
-
-![premise](https://raw.githubusercontent.com/true-gler/protocol-sim/master/docu/2.gif)
-
-
-Furthermore, n denotes the number of all participants in the crowd and c the number of the collabora-
-attacker at the time a transfer is started by the crowd
-(the path is set at the beginning, so other attackers are negligible). From this
-the core theorem of the work on the Crowds protocol is found, which has also been verified by our simulator. 
+### Outcome
 
 Verification of the Theorem 5.2 for anonymity from the work of Rubin et al on Crowds: "Anonymity for Web Transactions".
 (http://avirubin.com/crowds.pdf)
